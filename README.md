@@ -1,6 +1,6 @@
-# ISDS3105: Internet Development Tools - R programming (Fall 2018)
+## ISDS3105: Internet Development Tools - R programming (Fall 2018)
 
-**Class hours: T-Th, 3.00-4.20 PM, 1835 Business Education Complex**
+**T-Th, 3.00-4.20 PM, 1835 Business Education Complex**
 
 **Office Hours: Tu–Th 4.30–5.30 PM, 2400b BEC**
 
@@ -46,7 +46,7 @@ We adopt the standard LSU +/- grading scale without any forced curve. The breakd
 
 **Mid term 30%**: The first exam will focus on RMarkdown, data visualization (ggplot2), dataset normalization (tidyr), and data manipulation using dplyr (calculating descriptive statistics).
 
-**Group project 20%**: The group project is a data analysis project to assess your ability to import, transform, manipulate, visualize, and analyze data. The final output will be a report (interactive or static) to enhance the user’s understanding of a research question.
+**Group project 20%**: The group project is a data analysis project to assess your ability to import, transform, manipulate, visualize, and analyze data. The final output will be a report (interactive or static) to enhance the understanding of a research question.
 
 **Final Exam 25%**: The final exam will be comprehensive and will focus on both practical skills and theoretical aspects.
 
@@ -71,7 +71,7 @@ We adopt the standard LSU +/- grading scale without any forced curve. The breakd
 | Tuesday, September 25   | dplyr - connecting and querying DB |  Assignment4 | lesson9 
 | Thursday, September 27  | **Mid-term**              |                     | lesson10
 | Tuesday, October 2      | Geospatial Viz      |                       | lesson11 
-| ~~Thursday, October 4~~     | Fall Holiday| | |
+| ~~Thursday, October 4~~     | Fall Holiday| |    |
 | Tuesday, October 9       | Manipulating Dates  |                       |  lesson12
 | Thursday, October 11    | Open Data API       |   Assignment5 GeoViz                   | lesson13
 | Tuesday, October 16      | OpenData    |                              | lesson14
