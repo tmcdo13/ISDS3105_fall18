@@ -2,14 +2,14 @@
 
 Softwares to install:
 
-- [ ] R
-- [ ] RStudio
-- [ ] Git
+- [ ] R [download](https://www.r-project.org/)
+- [ ] RStudio [download](https://www.rstudio.com/products/rstudio/download/)
+- [ ] Git - [instructions](https://beta.rstudioconnect.com/jennybc/happy-git-with-r/install-git.html)
 - [ ] Slack Desktop (recommended)
 
 Accounts to open:
 
-- [ ] GitHub 
+- [ ] GitHub - [instructions](https://beta.rstudioconnect.com/jennybc/happy-git-with-r/github-acct.html)
 - [ ] GitHub Developer Pack
 - [ ] Slack
 
