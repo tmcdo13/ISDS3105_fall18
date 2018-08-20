@@ -1,5 +1,9 @@
 # ISDS3105: Internet Development Tools - R programming (Fall 2018)
 
+**Class hours: T-Th, 3.00-4.20 PM, 1835 Business Education Complex**
+
+**Office Hours: Tu–Th 4.30–5.30 PM, 2400b BEC**
+
 **Required Text**:	Wickham, H., & Grolemund, G. (2016). [R for data science](r4ds.had.co.nz/)
 
 **Required Softwares**:	[R](https://cran.r-project.org/mirrors.html), [RStudio Desktop](https://www.rstudio.com/products/rstudio/download), Git ([Windows](https://gitforwindows.org/) | [Mac](https://git-scm.com/))
