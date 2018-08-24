@@ -147,6 +147,8 @@ Respond to the following questions and push the responses to your GitHub:
    + you extract using a positive index bigger than the vector length?
    + you subset by a name that doesn't exist?
    + you assign a number to position 20 of the age vector? 
+   
+   This is an answer.
 
 
 
