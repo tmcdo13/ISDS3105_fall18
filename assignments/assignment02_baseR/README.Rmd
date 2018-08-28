@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The goal of this practice is to improve your understanding of vectors and how to manipulate them. The data we use are the prices of the [2017 Big Mac Index](http://www.economist.com/content/big-mac-index).
 
-For each question, please create a new chunck with your reponse. Use narratives to comment the output whenever the question requires to do so .
+For each question, please create a new chunck with your reponse. Use narratives to comment the output whenever the question requires to do so.
 
 
 1. Edit the code below to assign country names to the vector `countries` and prices to the vector `prices`. Hide the code below when you knit (check the Rmarkdown cheatsheet to find the appropriate chunk option to hide code).
