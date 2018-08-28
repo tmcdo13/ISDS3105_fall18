@@ -8,7 +8,7 @@ R is an object oriented language: Everything is an object
 -   Objects that allow to perform actions on other objects are called functions. They are "containers" with instructions about what to do with other objects (e.g., `mean()`, `sum()`)
 -   All functions have documentation files that can be accessed using `?` (e.g., `?mean()`)
 -   Every function requires a minimum set of arguments to run successfully (e.g., `mean()` requires an argument `x`)
--   Every function has constraints about the type of object that to be passed (e.g., `sum()` expects a vector)
+-   Every function has constraints about the type of object to be passed (e.g., `sum()` expects a vector)
 
 Naming rules for R objects
 --------------------------
@@ -150,15 +150,44 @@ Work out the exercises on a new branch of your git repo. Once you are confident 
 Respond to the following questions and push the responses to your GitHub:
 
 -   Create a character vector `family` with your family members' name
+
+``` r
+family <- c('Tyler','Lindsey', 'David', 'Adrienne')
+```
+
 -   Create a vector `birth` with their birth year
+
+``` r
+birth <- c(1997,1998,1954,1959)
+```
+
 -   Create another vector `age` with your family members' ages (calculated using `birth`)
+
+``` r
+age <- c(21,20,63,58)
+```
+
 -   Use `typeof()` to make sure that `family`, `birth`, and `age` are the appropriate type (character, integer/double, integer/double)
+
+``` r
+typeof(family)
+## [1] "character"
+typeof(birth)
+## [1] "double"
+typeof(age)
+## [1] "double"
+```
+
 -   Use `names()` to name the elements of `age` with the family members' names from `family`
--   Use inline code to print your name and age (using indexing)
+
+``` r
+names(age) <- family
+```
+
+-   Use inline code to print your name and age (using indexing) Tyler 21
 
 -   What happens when:
--   You extract using a positive index bigger than the vector length?
--   You subset by a name that doesn't exist?
--   You assign a number to position 20 of the age vector?
-
--   Read carefully the documentation for `is.vector()`. If `is.vector(x)` retrieves `TRUE`, does it mean that `x` is an atomic vector?
+-   You extract using a positive index bigger than the vector length? When you extract using a positive index bigger than the vector length, it will not find an element and return NA.
+-   You subset by a name that doesn't exist? When you subset by a name that doesn't exist, it again will not find an element and return NA.
+-   You assign a number to position 20 of the age vector? When you assign a number to position 20 of the age vector, it will automatically extends the size of the vector to 20, inserts the number into position 20, and fills the remaining indexes with NA.
+-   Read carefully the documentation for `is.vector()`. If `is.vector(x)` retrieves `TRUE`, does it mean that `x` is an atomic vector? For the method is.vector, a return value of TRUE does mean that it is an atomic vector and it can be optimized to find one or all of them
