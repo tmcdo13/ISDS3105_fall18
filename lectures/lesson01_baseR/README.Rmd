@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse = T)
  - Objects that allow to perform actions on other objects are called functions. They are "containers" with instructions about what to do with other objects (e.g., `mean()`, `sum()`)
  - All functions have documentation files that can be accessed using `?` (e.g., `?mean()`)
  - Every function requires a minimum set of arguments to run successfully (e.g., `mean()` requires an argument `x`)
- - Every function has constraints about the type of object that to be passed (e.g., `sum()` expects a vector)
+ - Every function has constraints about the type of object to be passed (e.g., `sum()` expects a vector)
 
 ## Naming  rules for R objects
 
