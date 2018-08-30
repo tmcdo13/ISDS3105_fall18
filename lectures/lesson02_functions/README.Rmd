@@ -295,6 +295,7 @@ yearlySalary <- function(x) {
   x2 <- ifelse(x>8000,x,NA)
   scales::dollar(x2)
 }
+
 ```
 
 

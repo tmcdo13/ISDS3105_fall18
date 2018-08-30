@@ -326,15 +326,6 @@ For the pros: Use `BRRR::skrrrahh(34)` to listen DJ Khaled yelling "They don't w
 Exercise 2
 ----------
 
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Write a function `yearlySalary` to convert any values &lt;8000 to NA. You can use indexing or a function such as `ifelse()`. Then, output each value as a dollar amount using `scales::dollar()`. For example, the `c(100, 0, NA, 2000, 8000)` should be returned as `c("$NA", "$NA", "$NA", "$NA", "$8000")`.
-
-``` r
-yearlySalary <- function(x) {
-  x2 <- ifelse(x>8000,x,NA)
-  scales::dollar(x2)
-}
-```
-
 Write a function `yearlySalary` to convert any values &lt;8000 to NA. You can use indexing or a function such as `ifelse()`. Then, output each value as a dollar amount using `scales::dollar()` or `paste()`. For example, the `c(100, 0, NA, 2000, 8000)` should be returned as `c("$NA", "$NA", "$NA", "$NA", "$8000")`.
 
 ``` r
