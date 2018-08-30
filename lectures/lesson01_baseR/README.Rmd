@@ -171,7 +171,7 @@ names(age) <- family
    + You assign a number to position 20 of the age vector? 
         When you assign a number to position 20 of the age vector, it will automatically extends the size of the vector to 20, inserts the number into position 20, and fills the remaining indexes with NA.
  - Read carefully the documentation for `is.vector()`. If `is.vector(x)` retrieves `TRUE`, does it mean that `x` is an atomic vector?
-     For the method is.vector, a return value of TRUE does mean that it is an atomic vector as 
+     For the method is.vector, a return value of TRUE does mean that it is an atomic vector and it can be optimized to find one or all of them
 
 
 
