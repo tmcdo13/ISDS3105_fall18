@@ -213,7 +213,7 @@ Conditional Execution
 Using `if(condition) { }` you can conditionally execute a snippet of code. For instance, we can test whether you installed the library `tidyverse` and install it if not:
 
 ``` r
-if(!require(tidyverse)) {install.packages(tidyverse)}
+if(!require(tidyverse)) {install.packages('tidyverse')}
 ```
 
 Each if-statement evaluates to a `TRUE` or `FALSE`, thus be carefull when you are testing vectors: Only the first element will be used.
@@ -285,18 +285,61 @@ Turn the followings into functions, making sure that your function retrieves an 
 
 -   `mean(x, na.rm = T)`
 
+``` r
+mean_rmT <- function(x) {
+  if(!is.numeric(x)) stop('`x` is not a numeric value')
+  mean(x, na.rm = T)
+}
+```
+
 -   `x / sum(x, na.rm = TRUE)`
 
+``` r
+divsum <- function(x) {
+  if(!is.numeric(x)) stop('`x` is not a numeric value')
+  x / sum(x, na.rm = TRUE)
+}
+```
+
 -   `sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)`
+
+``` r
+sd_over_mean <- function(x) {
+  if(!is.numeric(x)) stop('`x` is not a numeric value')
+  sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+}
+```
 
 For the pros: Use `BRRR::skrrrahh(33)` to listen DJ Khaled yelling "They don't wanna see us win!" when `x` is not numeric. The package is available on GitHub only:
 
 ``` r
-if(!require(devtools)) {install.packages(devtools)}
+if(!require(devtools)) {install.packages('devtools')}
 devtools::install_github("brooke-watson/BRRR")
 ```
+
+-   `x / sum(x, na.rm = TRUE)`
+
+-   `sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)`
+
+For the pros: Use `BRRR::skrrrahh(34)` to listen DJ Khaled yelling "They don't wanna see us win!" when `x` is not numeric. The package is available on GitHub only:
 
 Exercise 2
 ----------
 
-Write a function `yearlySalary` to convert any values &lt;8000 to NA. You can use indexing or a function such as `ifelse()`. Then, output each value as a dollar amount using `scales::dollar()`. For example, the `c(100, 0, NA, 2000, 8000)` should be returned as `c("$NA", "$NA", "$NA", "$NA", "$8000")`.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Write a function `yearlySalary` to convert any values &lt;8000 to NA. You can use indexing or a function such as `ifelse()`. Then, output each value as a dollar amount using `scales::dollar()`. For example, the `c(100, 0, NA, 2000, 8000)` should be returned as `c("$NA", "$NA", "$NA", "$NA", "$8000")`.
+
+``` r
+yearlySalary <- function(x) {
+  x2 <- ifelse(x>8000,x,NA)
+  scales::dollar(x2)
+}
+```
+
+Write a function `yearlySalary` to convert any values &lt;8000 to NA. You can use indexing or a function such as `ifelse()`. Then, output each value as a dollar amount using `scales::dollar()` or `paste()`. For example, the `c(100, 0, NA, 2000, 8000)` should be returned as `c("$NA", "$NA", "$NA", "$NA", "$8000")`.
+
+``` r
+yearlySalary <- function(x) {
+  x2 <- ifelse(x>8000,x,NA)
+  scales::dollar(x2)
+}
+```
