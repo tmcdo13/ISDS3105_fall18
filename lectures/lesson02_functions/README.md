@@ -81,6 +81,15 @@ showValue(x = 5)
 
     ## [1] 5
 
+Arguments can have default values. For instance:
+
+``` r
+showValue <- function(x = 5, y = 10) c(x, y)
+showValue(x = 7)
+```
+
+    ## [1]  7 10
+
 If an object is not defined inside the function, R will look for it one level up, untill it reachers the global enviroment:
 
 ``` r
@@ -140,18 +149,6 @@ assignValue(9)
 ```
 
     ## [1] "I created 9 in the global env!"
-
-Default values
---------------
-
-As you know from using functions, arguments can have default values. For instance:
-
-``` r
-showValue <- function(x = 5, y = 10) c(x, y)
-showValue(x = 7)
-```
-
-    ## [1]  7 10
 
 The `...` argument
 ------------------
