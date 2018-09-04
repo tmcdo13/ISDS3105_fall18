@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE, collapse = T)
 
 ```{r, message=FALSE}
 if (!require(tidyverse)) {install.packages('tidyverse')}
-library(fivethirtyeight)
 library(tidyverse)
 ```
 

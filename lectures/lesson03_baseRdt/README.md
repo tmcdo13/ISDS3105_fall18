@@ -3,7 +3,6 @@ Lesson 3: Data frames and tibbles
 
 ``` r
 if (!require(tidyverse)) {install.packages('tidyverse')}
-library(fivethirtyeight)
 library(tidyverse)
 ```
 
