@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse = T)
 ```
 
 
-```{r}
+```{r, message=FALSE}
 if (!require(fivethirtyeight)) {remotes::install_github("rudeboybert/fivethirtyeight", build_vignettes = TRUE)}
 if (!require(tidyverse)) {install.packages('tidyverse')}
 library(fivethirtyeight)
