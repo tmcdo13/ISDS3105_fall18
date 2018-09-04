@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE, collapse = T)
 
 
 ```{r, message=FALSE}
-if (!require(fivethirtyeight)) {remotes::install_github("rudeboybert/fivethirtyeight", build_vignettes = TRUE)}
 if (!require(tidyverse)) {install.packages('tidyverse')}
 library(fivethirtyeight)
 library(tidyverse)
@@ -131,7 +130,7 @@ c(1:10, NA) %>%
 ```
 
 Which is equivalent to 
-```{r, eval=FALSE}
+```{r}
 c(1:10, NA) %>% 
   mean(x = . , na.rm = T) %>% 
   round(x = ., digits = 0)
@@ -142,6 +141,10 @@ c('hello', 'hi', 'bye', 'ciao') %>%
 ```
 
 
+```{r}
+# `$` is a function too. Can you pipe `iphoneSales` to `$` to extract the vectro `iPhoneX`? Then, calculate the mean removing NAs
+
+```
 
 
 

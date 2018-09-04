@@ -2,7 +2,6 @@ Lesson 3: Data frames and tibbles
 ================
 
 ``` r
-if (!require(fivethirtyeight)) {remotes::install_github("rudeboybert/fivethirtyeight", build_vignettes = TRUE)}
 if (!require(tidyverse)) {install.packages('tidyverse')}
 library(fivethirtyeight)
 library(tidyverse)
@@ -185,8 +184,14 @@ Which is equivalent to
 c(1:10, NA) %>% 
   mean(x = . , na.rm = T) %>% 
   round(x = ., digits = 0)
+## [1] 6
 #' the dot is just a pronoun for what precedes the pipe operator
 #' sometimes you don't want to pipe into the first argument
 c('hello', 'hi', 'bye', 'ciao') %>% 
   gsub('ciao', 'hello', .)
+## [1] "hello" "hi"    "bye"   "hello"
+```
+
+``` r
+# `$` is a function too. Can you pipe `iphoneSales` to `$` to extract the vectro `iPhoneX`? Then, calculate the mean removing NAs
 ```
