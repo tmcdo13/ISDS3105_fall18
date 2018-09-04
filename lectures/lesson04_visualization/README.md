@@ -27,18 +27,6 @@ load(here::here('data', 'dataset.RData'))
 Using ggplot2
 -------------
 
-ggplot2 builds on an underlying grammar, which entails seven fundamental elements:
-
-| Element     | Visual attribute                      |
-|-------------|---------------------------------------|
-| data        | dataset with the variables of interst |
-| aesthetics  | x-axis, y-axis, color, fill, alpha    |
-| geometries  | bars, dots, lines                     |
-| facets      | coloumns, rows                        |
-| statistics  | bins, smooth, count                   |
-| coordinates | polar, cartesian                      |
-| themes      | non-data ink                          |
-
 Each ggplot2 statement requires at least a dataset, a set of aesthetics that the variables are mapped to, and the geometrical shape to visualize the aesthetics into.
 
 For instance, to plot a chart of million of twitter users per year:
@@ -53,6 +41,18 @@ ggplot() +
 Millions of Twitter users
 </p>
 
+ggplot2 builds on an underlying grammar, which entails seven fundamental elements:
+
+| Element     | Visual attribute                      |
+|-------------|---------------------------------------|
+| data        | dataset with the variables of interst |
+| aesthetics  | x-axis, y-axis, color, fill, alpha    |
+| geometries  | bars, dots, lines                     |
+| facets      | coloumns, rows                        |
+| statistics  | bins, smooth, count                   |
+| coordinates | polar, cartesian                      |
+| themes      | non-data ink                          |
+
 The [concept of *mapping*](http://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings) is fundamental when learning ggplot2; although it might not be very intuitive at first, it ensures a high level of consistency when working in complex multivariate enviroment. *To map* means to assign a variable to an *aesthetic*, namely to a visual property such' height, fill color, border color, etc. In the previous example we mapped only to x-y coordinates; but you can call `?geom_col()` and scroll down in the help pane to the paragraph *Aesthetics* for a complete list of the attributes available. For instance, try to map Year to the fill too:
 
 ``` r
@@ -60,61 +60,50 @@ ggplot() +
   geom_col(data =  twitter_users, aes(x = Year, y = millions, ------ ))
 ```
 
-Use `freqCasualties` to plot a barchart of casualties count by class and gender
+From `freqCasualties`, plot a barchart of the count of casualties by class and gender (each bar refers to a class)
 
 ``` r
-#what chart/geom?
 #what do we want to map to x and y? how do we map the third variable?
 ```
 
-Using the same set of aesthetics and mapped variables, we can create different charts by using different `geom_*` functions. For instance,
-
-``` r
-#the dataset twitter_users
-#the set of aesthetics we are using: aes(x = Year, y = millions )
-#ggplot() +
-  #use geom_line()
-  #use geom_point()
-```
-
-Some times, you want to manually **set** a value for a certain aesthetic, rather than **mapping** a variable to it. In this case, the aesthetic is not usually interpretable, but it might be be helpful to make a chart clearer or more appealing. For instance, note the difference between the charts below:
+Some times, you want to manually **set** a value for a certain aesthetic, rather than **mapping** a variable to in - in which the aesthetic is really interpretable, since is a non-data ink element. For instance, note the difference between the charts below:
 
 ``` r
 ggplot() +
   geom_line(data =  twitter_users, aes(x = Year, y = millions, color ='blue' )) 
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 ggplot() +
 geom_line(data =  twitter_users, aes(x = Year, y = millions), color ='blue') 
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-2.png)
 
 To change color, you can use either [color names](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) (e.g., 'red'), hex codes (e.g., `#ff0000`) or rgb (e.g. `rgb(255, 0, 0)`).
 
-So far, we specified aesthetics and datasets inside a specific geom, but usually we put them in the `ggplot()` function and let the `geom_` to inherit them from the `ggplot()` statement:
+So far, we specified aesthetics and datasets inside a specific geom, but if we only use one dataset we can pass it to the `ggplot()` function and let the `geom_` to inherit the `aes` from the `ggplot()` statement.
 
 ``` r
-#use twitter_users to plot twitter users
-#use sn_users to overlap FB users
+#Use the dataset twitter_users
+#Use the set of aesthetics: aes(x = Year, y = millions )
+#combine together geom_line() and geom_point() 
 ```
 
-If you ran `ggplot()` and `geom_` separately, you might notice that every `geom_` is nothing but a new layer added to the plane. This means that you can overlap multiple geoms in the same chart:
-
 ``` r
-  #use geom_line AND geom_point
+#use twitter_users to plot a linechart of twitter users over time
+#use sn_users to overlay a linechart of FB users over time
 ```
 
 ### Exercise:
 
--   use `beerDt` to create a linechart of beer consumption in US from 1903.
+-   use `beerDt` to create a linechart of beer consumption (in gallons of ethanol) in US from 1903.
 -   add a layer of points using `geom_point`
 
-Suppose that you now want to color the point presenting your birthyear. We can do it in two steps:
+Suppose that you now want to flag the observation for consumption in your birthyear. We can do it in two steps:
 
-    1. Use ifelse() to create a character column called 'myBirthYear' that takes value 'My birthyear' for your birth year, and NA for everything else.
+    1. Create a new variable called 'myBirthYear' that takes value 'My birthyear' for your birth year, and NA for everything else. You could use `ifelse()` or conditional indexing/assignment
     2. Map `myBirthYear` to the fill of `geom_point` to flag your birth year
     3. Use ggtitle to add a title to the chart

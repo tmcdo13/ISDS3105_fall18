@@ -32,6 +32,14 @@ load(here::here('data', 'dataset.RData'))
 
 ##Using ggplot2
 
+Each ggplot2 statement requires at least a dataset, a set of aesthetics that the variables are mapped to, and the geometrical shape to visualize the aesthetics into. 
+
+For instance, to plot a chart of million of twitter users per year:
+```{r, fig.cap='Millions of Twitter users', out.width='80%', fig.asp=.75, fig.align='center'}
+ggplot() +
+  geom_col(data =  twitter_users, aes(x = Year, y = millions))
+```
+
 ggplot2 builds on an underlying grammar, which entails seven fundamental elements:
 
 Element | Visual attribute
@@ -43,14 +51,6 @@ facets | coloumns, rows
 statistics | bins, smooth, count
 coordinates | polar, cartesian
 themes | non-data ink
-
-Each ggplot2 statement requires at least a dataset, a set of aesthetics that the variables are mapped to, and the geometrical shape to visualize the aesthetics into. 
-
-For instance, to plot a chart of million of twitter users per year:
-```{r, fig.cap='Millions of Twitter users', out.width='80%', fig.asp=.75, fig.align='center'}
-ggplot() +
-  geom_col(data =  twitter_users, aes(x = Year, y = millions))
-```
 
 The [concept of _mapping_](http://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings) is fundamental when learning ggplot2; although it might not be very intuitive at first, it ensures a high level of consistency when working in complex multivariate enviroment. _To map_ means to assign a variable to an _aesthetic_, namely to a visual property such' height, fill color, border color, etc. In the previous example we mapped only to x-y coordinates; but you can call `?geom_col()` and scroll down in the help pane to the paragraph _Aesthetics_ for a complete list of the attributes available. For instance, try to map Year to the fill too:
 
