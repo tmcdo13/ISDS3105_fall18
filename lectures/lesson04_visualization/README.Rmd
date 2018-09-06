@@ -100,7 +100,11 @@ So far, we specified aesthetics and datasets inside a specific geom. However, if
  - use `beerDt` to create a linechart of beer consumption (in gallons of ethanol) in US from 1903.
  - add a layer of points using `geom_point`
  
- Flag the observation for beer consumption in your birthyear (for instance changing the point color). One approach is to create a dummy variable called 'myBirthYear' that takes value 'My birthyear' for your birth year, and NA for everything else. You could use `ifelse()` or conditional indexing/assignment. Use `ggtitle()` to add a title to the chart.
+ Suppose that you now want to flag the observation for consumption in your birthyear. We can do it in two steps:
+    
+    1. Create a new variable called 'myBirthYear' that takes value 'My birthyear' for your birth year, and NA for everything else. You could use `ifelse()` or conditional indexing/assignment
+    2. Map `myBirthYear` to the fill of `geom_point` to flag your birth year
+    3. Use ggtitle to add a title to the chart
 
 
 
