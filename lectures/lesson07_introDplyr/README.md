@@ -1,4 +1,4 @@
-lesson 7: Intro to dplyr
+lesson 7: Data manipulation
 ================
 
 # Data analysis
@@ -6,9 +6,9 @@ lesson 7: Intro to dplyr
 `dplyr` is a package within the `tidyverse` designed for data
 manipulation: transforming, selecting, grouping and summarizing
 variables. The philosphy of `dplyr` is to offer a more intuitive syntax
-than base R. Additionally, it allows to translate R code into SQL
-queries, which means we can query remote sources such as a MySQL
-database using R code.
+than base R. Also, it makes easy to translate R/dplyr code into SQL
+queries, which means we can use dplyr to query remote sources such as a
+MySQL database.
 
 \#\#The pipe operator
 
@@ -73,8 +73,7 @@ To manipulate dataframes:
 
 \#\#\#Filter
 
-Filter retrieves all rows for which testing the conditions retrieves
-`TRUE`:
+`filter()` retrieves all rows that evaluate to `TRUE`:
 
 ``` r
 #to retain all Spanish males:
