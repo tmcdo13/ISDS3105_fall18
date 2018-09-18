@@ -69,19 +69,22 @@ iphoneSales$iPhone4S
 # use dataframe[row,col] to
 
 #extract the first two elements of column "IPhone6s"
-
+iphoneSales[['iPhone6S']][1:2]
+iphoneSales$iPhone6S[1:2]
 #subset iphoneSales to a dataframe with only time, iPhone5C, IPhoneX
-
+iphoneSales[,c(1,3,14)]
+iphoneSales[c('time','iPhone5C','iPhoneX')]
 #keep only the rows where the sales for iPhoneSE are higher than 7 AND are not NA (AND = &, OR = |, NOT = !)
-
+#*******
+iphoneSales[iphoneSales$iPhoneSE > 7 & !is.na(iphoneSales$iPhoneSE),]
+#*******
 #Use %in% to keep only the rows for c("Sep 2014", "Sep 2015", "Sep 2018")
-
+iphoneSales[iphoneSales$time %in% c('Sep 2014', 'Sep 2015', 'Sep 2018'),]
 #calculate the mean() of the IPhone7 sold 
-
+mean(iphoneSales$iPhone7,na.rm = TRUE)
 #use inline code to print the mean of the iphone sold in Jun 2018
-
 ```
-
+`r {mean(as.numeric(iphoneSales[iphoneSales$time == 'Jun 2018',]),na.rm = TRUE)}`
 
 However, the `tidyverse` is best suited for using rectangular data structures called `tibbles` instead of data frames. To convert a `data.frame` into a `tibble`:
 
@@ -95,21 +98,22 @@ Because tibbles are also dataframes, you can use indexing as you would do on a `
 
 ```{r}
 iphoneSales_tibble <- tibble(year = c(2017, 2018), 
-                    iphones = list(
-                      c(iphone7 = 13, iphone7plus = 11), 
-                      c(iphone7 = 16, iphone7plus = 11))
-                    )
+                             iphones = list(
+                               c(iphone7 = 13, iphone7plus = 11), 
+                               c(iphone7 = 16, iphone7plus = 11))
+)
 iphoneSales_tibble
 
 iphoneSales_df <- data.frame(year = c(2017, 2018), 
-       iphones = list(list(iphone7 = 13, iphone7plus = 11), list(iphone7 = 16, iphone7plus = 11)))
+                             iphones = list(list(iphone7 = 13, iphone7plus = 11), list(iphone7 = 16, iphone7plus = 11)))
 iphoneSales_df
 ```
 
 
 ```{r}
 # from iphoneSales_tibble extract the *vector* with the amounts of iphone7/7plus sold in 2017
-
+iphoneSales_tibble$iphones[[1]]
+#iphoneSales_tibble[iphoneSales_tibble$year == '2017']
 
 ```
 
@@ -120,7 +124,7 @@ Before moving into tidyverse, we need to familiarize with the `%>%` (pipe), an o
 round(mean(c(1:10, NA), na.rm = T), 0)
 ```
 
-You can "pipe" the above functions using `%>%` (shortcut: shift+cmd/ctrl+I), which passes the output that preceeds `%>%` to the first argument of the subsequent function (or alternatively anywhere you place a `.`). For instance:
+You can "pipe" the above functions using `%>%` (shortcut: shift+cmd/ctrl+M), which passes the output that preceeds `%>%` to the first argument of the subsequent function (or alternatively anywhere you place a `.`). For instance:
 
 ```{r}
 c(1:10, NA) %>% 

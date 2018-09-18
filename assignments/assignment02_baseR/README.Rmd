@@ -18,7 +18,7 @@ For each question, please create a new chunck with your reponse. Use narratives 
 
 1. Edit the code below to assign country names to the vector `countries` and prices to the vector `prices`. Hide the code below when you knit (check the Rmarkdown cheatsheet to find the appropriate chunk option to hide code).
 
-```{r}
+```{r echo=FALSE}
 #countries
 countries <- c("Argentina", "Australia", "Brazil", "Britain", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Czech Republic", "Denmark", "Egypt", "Euro area", "Hong Kong", "Hungary", "India", "Indonesia", "Israel", "Japan", "Malaysia", "Mexico", "New Zealand", "Norway", "Pakistan", "Peru", "Philippines", "Poland", "Russia", "Saudi Arabia", "Singapore", "South Africa", "South Korea", "Sri Lanka", "Sweden", "Switzerland", "Taiwan", "Thailand", "Turkey", "UAE", "Ukraine", "United States", "Uruguay", "Venezuela", "Vietnam", "Austria", "Belgium", "Estonia", "Finland", "France", "Germany", "Greece", "Ireland", "Italy", "Netherlands", "Portugal", "Spain")
 
@@ -34,8 +34,8 @@ typeof(prices)
 
 3. Use `names()` to name the `prices` using `countries`. Show the first 5 values of your new vector
 ```{r}
-prices_with_countries <- names(prices) <- countries
-prices_with_countries[c(1:5)]
+names(prices) <- countries
+prices[c(1:5)]
 ```
 
 4. Use `round()` to round the prices at the 3rd decimal. Overwrite `prices` with the rounded prices.
@@ -45,31 +45,49 @@ prices <- round(prices,3)
 
 5. Use indexing to report the prices for Canada, United States, Mexico
 ```{r}
-prices_with_countries['Canada']
-prices_with_countries['United States']
-prices_with_countries['Mexico']
+prices['Canada']
+prices['United States']
+prices['Mexico']
 ```
 
 6. Use inline code and the function `length()` to display the following sentence:
-```{r}
-{r length("The are x observations in the Big_Mac Index")}
-```
+
 "The are x observations in the Big-Mac Index"
+
+The are `r length(prices)` observations in the Big-Mac Index
 
 7. Convert the prices from Dollar to Euro (1 Dollar = .83 Euro). In the narrative, comment about the property which allows you to combine a vector of length 1 (the exchange rate) with a vector of length 56 (the prices). 
 ```{r}
-toEuros <- function(prices) {
-  return .83 * prices
+# r automatically allows you to combine two vectors based on theit   type and since both parameters were vectors, 
+
+#euro <- c(.83)
+euro <- rep(.83,45)
+toEuros <- function(prices,euro) {
+  return (euro * prices[1:56])
 }
+toEuros(prices,euro)
 ```
 
  - Could you use the vector `rep(.83, 28)` to do the same? 
+    Yes, this works since 28 is a factor of 56
  - Could you use the vector `rep(.83, 112)` to do the same?
+    No, this doesn't work because 112 is larger than 56 and thus       the result would be a vector of length 112
  - Would `rep(.83, 45)` also work? Why?
-
+    Yes, this would work because 45 is less than 56, but it does       give you a warning because 45 is not a factor of 56
+    
 8. In your narrative, mention that we are going to drop the 46th element. Use dynamic code to report the country that will drop.
 
+```{r}
+# This chunk of code drops the 46th element
+prices[46]
+```
+
+
 9. Overwrite the vector of prices with a new vector without observation 46. Use `length()` to make sure you have one observation less.
+```{r}
+prices_no_46 <- prices[c(1:45,47:56)]
+length(prices)
+```
 
 10. Knit, commit and push to your GitHub repo `assignment`. Then submit the link to the *assignment folder* on Moodle.
 

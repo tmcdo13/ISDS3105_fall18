@@ -8,34 +8,127 @@ For each question, please create a new chunck with your reponse. Use narratives 
 
 1.  Edit the code below to assign country names to the vector `countries` and prices to the vector `prices`. Hide the code below when you knit (check the Rmarkdown cheatsheet to find the appropriate chunk option to hide code).
 
-``` r
-#countries
-countries <- c("Argentina", "Australia", "Brazil", "Britain", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Czech Republic", "Denmark", "Egypt", "Euro area", "Hong Kong", "Hungary", "India", "Indonesia", "Israel", "Japan", "Malaysia", "Mexico", "New Zealand", "Norway", "Pakistan", "Peru", "Philippines", "Poland", "Russia", "Saudi Arabia", "Singapore", "South Africa", "South Korea", "Sri Lanka", "Sweden", "Switzerland", "Taiwan", "Thailand", "Turkey", "UAE", "Ukraine", "United States", "Uruguay", "Venezuela", "Vietnam", "Austria", "Belgium", "Estonia", "Finland", "France", "Germany", "Greece", "Ireland", "Italy", "Netherlands", "Portugal", "Spain")
+2.  Use `typeof()` to report the type of both vectors.
 
-#prices in dollars
-prices <- c(4.12553410932665, 4.527955, 5.10156757258139, 4.1114315, 4.6556967948218, 3.84409554461789, 2.9171270718232, 3.24360452925142, 4.00003493480292, 3.28139971386194, 4.60649054517816, 1.75398378529494, 4.4650245, 2.45791461307047, 3.20894752849616, 2.75723192502808, 2.40293204682299, 4.77333709927976, 3.36104723155846, 2.00302783277047, 2.75424026530641, 4.43226, 5.91416018925313, 3.56633380884451, 3.22927879440258, 2.64945182050953, 2.72339966564202, 2.27813538775693, 3.1998720051198, 4.06474559047688, 2.26073850791258, 3.84396977241952, 3.77297121483168, 5.81892070131244, 6.74168957112483, 2.26396522024444, 3.49624667636214, 3.00611009353896, 3.81159814865233, 1.69785838317577, 5.3, 4.52882773036056, 4.05555555555556, 2.63939293962389, 3.88263, 4.6248975, 3.5971425, 5.207292, 4.681995, 4.453605, 3.8255325, 4.6477365, 4.79619, 4.1224395, 3.7113375, 4.33941)
+``` r
+typeof(countries)
 ```
 
-1.  Use `typeof()` to report the type of both vectors.
+    ## [1] "character"
 
-2.  Use `names()` to name the `prices` using `countries`. Show the first 5 values of your new vector
+``` r
+typeof(prices)
+```
 
-3.  Use `round()` to round the prices at the 3rd decimal. Overwrite `prices` with the rounded prices.
+    ## [1] "double"
 
-4.  Use indexing to report the prices for Canada, United States, Mexico
+1.  Use `names()` to name the `prices` using `countries`. Show the first 5 values of your new vector
 
-5.  Use inline code and the function `length()` to display the following sentence:
+``` r
+names(prices) <- countries
+prices[c(1:5)]
+```
+
+    ## Argentina Australia    Brazil   Britain    Canada 
+    ##  4.125534  4.527955  5.101568  4.111432  4.655697
+
+1.  Use `round()` to round the prices at the 3rd decimal. Overwrite `prices` with the rounded prices.
+
+``` r
+prices <- round(prices,3)
+```
+
+1.  Use indexing to report the prices for Canada, United States, Mexico
+
+``` r
+prices['Canada']
+```
+
+    ## Canada 
+    ##  4.656
+
+``` r
+prices['United States']
+```
+
+    ## United States 
+    ##           5.3
+
+``` r
+prices['Mexico']
+```
+
+    ## Mexico 
+    ##  2.754
+
+1.  Use inline code and the function `length()` to display the following sentence:
 
 "The are x observations in the Big-Mac Index"
 
+The are 56 observations in the Big-Mac Index
+
 1.  Convert the prices from Dollar to Euro (1 Dollar = .83 Euro). In the narrative, comment about the property which allows you to combine a vector of length 1 (the exchange rate) with a vector of length 56 (the prices).
 
--   Could you use the vector `rep(.83, 28)` to do the same?
--   Could you use the vector `rep(.83, 112)` to do the same?
--   Would `rep(.83, 45)` also work? Why?
+``` r
+# r automatically allows you to combine two vectors based on theit   type and since both parameters were vectors, 
+
+#euro <- c(.83)
+euro <- rep(.83,45)
+toEuros <- function(prices,euro) {
+  return (euro * prices[1:56])
+}
+toEuros(prices,euro)
+```
+
+    ## Warning in euro * prices[1:56]: longer object length is not a multiple of
+    ## shorter object length
+
+    ##      Argentina      Australia         Brazil        Britain         Canada 
+    ##        3.42458        3.75824        4.23466        3.41213        3.86448 
+    ##          Chile          China       Colombia     Costa Rica Czech Republic 
+    ##        3.19052        2.42111        2.69252        3.32000        2.72323 
+    ##        Denmark          Egypt      Euro area      Hong Kong        Hungary 
+    ##        3.82298        1.45582        3.70595        2.04014        2.66347 
+    ##          India      Indonesia         Israel          Japan       Malaysia 
+    ##        2.28831        1.99449        3.96159        2.78963        1.66249 
+    ##         Mexico    New Zealand         Norway       Pakistan           Peru 
+    ##        2.28582        3.67856        4.90862        2.95978        2.68007 
+    ##    Philippines         Poland         Russia   Saudi Arabia      Singapore 
+    ##        2.19867        2.26009        1.89074        2.65600        3.37395 
+    ##   South Africa    South Korea      Sri Lanka         Sweden    Switzerland 
+    ##        1.87663        3.19052        3.13159        4.82977        5.59586 
+    ##         Taiwan       Thailand         Turkey            UAE        Ukraine 
+    ##        1.87912        2.90168        2.49498        3.16396        1.40934 
+    ##  United States        Uruguay      Venezuela        Vietnam        Austria 
+    ##        4.39900        3.75907        3.36648        2.19037        3.22289 
+    ##        Belgium        Estonia        Finland         France        Germany 
+    ##        3.83875        2.98551        4.32181        3.88606        3.69682 
+    ##         Greece        Ireland          Italy    Netherlands       Portugal 
+    ##        3.17558        3.85784        3.98068        3.42126        3.08013 
+    ##          Spain 
+    ##        3.60137
+
+-   Could you use the vector `rep(.83, 28)` to do the same? Yes, this works since 28 is a factor of 56
+-   Could you use the vector `rep(.83, 112)` to do the same? No, this doesn't work because 112 is larger than 56 and thus the result would be a vector of length 112
+-   Would `rep(.83, 45)` also work? Why? Yes, this would work because 45 is less than 56, but it does give you a warning because 45 is not a factor of 56
 
 1.  In your narrative, mention that we are going to drop the 46th element. Use dynamic code to report the country that will drop.
 
-2.  Overwrite the vector of prices with a new vector without observation 46. Use `length()` to make sure you have one observation less.
+``` r
+# This chunk of code drops the 46th element
+prices[46]
+```
 
-3.  Knit, commit and push to your GitHub repo `assignment`. Then submit the link to the *assignment folder* on Moodle.
+    ## Belgium 
+    ##   4.625
+
+1.  Overwrite the vector of prices with a new vector without observation 46. Use `length()` to make sure you have one observation less.
+
+``` r
+prices <- prices[c(1:45,47:56)]
+length(prices)
+```
+
+    ## [1] 55
+
+1.  Knit, commit and push to your GitHub repo `assignment`. Then submit the link to the *assignment folder* on Moodle.
