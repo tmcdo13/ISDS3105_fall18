@@ -10,7 +10,7 @@ than base R. Also, it makes easy to translate R/dplyr code into SQL
 queries, which means we can use dplyr to query remote sources such as a
 MySQL database.
 
-\#\#The pipe operator
+## The pipe operator
 
 To use the tidyverse more efficiently, the `tidyverse` introduces an
 operator that is not originally available in base R, but allows to
@@ -43,7 +43,7 @@ c(1:10, NA) %>%
   round(x = ., digits = 0)
 ```
 
-\#\#dplyr verbs
+## dplyr verbs
 
 dplyr has seven fundamental verbs for data manipulation.
 
@@ -69,9 +69,9 @@ To manipulate dataframes:
 
   - `*_join()`: merge multiple dataframe together
 
-\#\#Manipulating rows
+## Manipulating rows
 
-\#\#\#Filter
+### Filter
 
 `filter()` retrieves all rows that evaluate to `TRUE`:
 
@@ -168,7 +168,7 @@ titanicDt %>% filter(between(row_number(), 1, 3))
     ## 2   2nd Male Child       No  0
     ## 3   3rd Male Child       No 35
 
-\#\#\#Distinct
+### Distinct
 
 `distinct` retains unique rows from the input table grouping by the
 variables specified. For instance, the combination of unique
@@ -193,7 +193,7 @@ to specify `.keep_all = FALSE`.
 2.  Using `titanicDt`, create a 2 columns dataset for the unique
     combinations of `Age` and `Sex`
 
-\#\#\#Arrange
+### Arrange
 
 `arrange` sorts the rows by the grouping variables you pass to the
 function:
@@ -294,9 +294,9 @@ selfiesCasualties %>%
 
 2.  Using `titanicDt`, arrange descending by `n`
 
-\#\#Manipulate Columns
+## Manipulate Columns
 
-\#\#\#Select and mutate
+### Select and mutate
 
 `select` keeps only the variables you pass (or it drops them if you use
 `-`). For example to select only `class` and `country`:
@@ -595,7 +595,7 @@ selfiesCasualties %>%
 
 3.  Using `untidyReview`, turn `reviewStayYear` into a integer
 
-\#\#\#Grouping
+### Grouping
 
 `group_by` converts your tibble into subgroups depending on the grouping
 variable(s). It is usually used to group data before summarising with
@@ -656,7 +656,7 @@ by class. One way, is to combine `groub_by()`, `sum()` and `n()`. Make
 sure you understand the difference between `sum()` and `n()` and how
 they behave when grouping.
 
-\#\#Manipulating dataframes
+## Manipulating dataframes
 
 Sometimes you need to combine different datasets into one. To join
 different dataset, you need at least one variable showing what is the

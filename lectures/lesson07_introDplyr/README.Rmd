@@ -16,7 +16,7 @@ load(here::here('data', 'dataset.RData'))
 
 `dplyr` is a package within the `tidyverse` designed for data manipulation: transforming, selecting, grouping and summarizing variables. The philosphy of `dplyr` is to offer a more intuitive syntax than base R. Also, it makes easy to translate R/dplyr code into SQL queries, which means we can use dplyr to query remote sources such as a MySQL database.
 
-##The pipe operator
+## The pipe operator
 
 To use the tidyverse more efficiently, the `tidyverse` introduces an operator that is not originally available in base R, but allows to _chain_ functions together, rather than _nesting_ them. This operator `%>%` is called the pipe. 
 What the `%>%` does, is to pass the value that preceeds `%>%` to the first position of the subsequent function (or alternatively anywhere you place a `.`). For instance:
@@ -40,7 +40,7 @@ c(1:10, NA) %>%
 ```
 
 
-##dplyr verbs
+## dplyr verbs
 
 dplyr has seven fundamental verbs for data manipulation.
 
@@ -65,9 +65,9 @@ To manipulate dataframes:
 
   - `*_join()`: merge multiple dataframe together
   
-##Manipulating rows
+## Manipulating rows
 
-###Filter
+### Filter
 
 `filter()` retrieves all rows that evaluate to `TRUE`:
 
@@ -108,7 +108,7 @@ titanicDt %>% filter(between(row_number(), 1, 3))
 ```
 
 
-###Distinct
+### Distinct
 
 `distinct` retains unique rows from the input table grouping by the variables specified. For instance, the combination of unique country-gender combinations:
 
@@ -132,7 +132,7 @@ Note that `distinct` will also automatically drop all columns that are not passe
 
 
 
-###Arrange
+### Arrange
 
 `arrange` sorts the rows by the grouping variables you pass to the function:
 
@@ -151,9 +151,9 @@ selfiesCasualties %>%
 
 ```
 
-##Manipulate Columns
+## Manipulate Columns
 
-###Select and mutate
+### Select and mutate
 
 `select` keeps only the variables you pass (or it drops them if you use `-`). For example to select only `class` and `country`:
 ```{r}
@@ -197,7 +197,7 @@ selfiesCasualties %>%
 ```
 
 
-###Grouping
+### Grouping
 
 `group_by` converts your tibble into subgroups depending on the grouping variable(s). It is usually used to group data before summarising with `summarise`. For instance, to count the number of female and male victims by country:
 
@@ -240,7 +240,7 @@ selfiesCasualties %>%
 Exercise: Use `selfiesCasualties` to calculate the percent of casualties by class. One way, is to combine `groub_by()`, `sum()` and `n()`. Make sure you understand the difference between `sum()` and `n()` and how they behave when grouping.
 
 
-##Manipulating dataframes
+## Manipulating dataframes
 
 Sometimes you need to combine different datasets into one. To join different dataset, you need at least one variable showing what is the relationship between the datasets and how to join them. For instance, consider the case where you have two separates dataset about the count of twitter and FB users during the same years (Source: eMarketer):
 
