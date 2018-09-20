@@ -227,15 +227,15 @@ downloading unnecessary data on your machine.
     differences between the average of those 5 attributes and
     ratingOverall.
 
-9.  Report all data about brands that have minimum square footage
-    requirement for rooms that exceeds the average minimum square
-    footage of all brands by at least 50%.
-
 *warning*: If you query the DB and then pipe the remote table into a
 ggplot2 function, you might need to `collect()` the remote table before
 passing it to `ggplot()`, because `ggplot()` expects a class
 `data.frame` (and tibbles are also data.frame). However, if you pass a
 different object (such as a connection) “it will be converted to one by
-fortify()” (see the documentation `?ggplot()). Apparently, for some of
-you`fortify()`does not convert the table to a local data.frame, and if
-that is the case you need to`collect()\`.
+fortify()” (see the documentation `?ggplot()`). Apparently, for some of
+you `fortify()` does not convert the table to a local data.frame, and if
+that is the case you need to `collect()`.
+
+1.  Report all data about brands that have minimum square footage
+    requirement for rooms that exceeds the average minimum square
+    footage of all brands by at least 50%.
