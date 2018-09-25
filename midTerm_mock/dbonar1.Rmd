@@ -51,7 +51,7 @@ hh <- employeesCount %>% arrange(desc(count))
 The unique department names are: `r hh$department_name`
 
 ```{r}
-hh <- employeesCount %>% 
+hh <- hh %>% 
           filter(department_name == 'MOSQUITO & RODENT CONTROL')
 ```
 
