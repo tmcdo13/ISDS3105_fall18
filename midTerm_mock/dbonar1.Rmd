@@ -1,7 +1,7 @@
 ---
 title: "ISDS 3105 mid-term Exam"
 author: "Dario Bonaretti"
-date: "2/24/2018"
+date: 25/9/2018
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -9,6 +9,8 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+options(scipen=999) #this removes scientific formatting
+
 ```
 
 ```{r message=FALSE}
@@ -18,18 +20,18 @@ library(tidyverse)
 
 
 ```{r}
-load('employeesBR.RData')
+load(here::here('midTerm_mock/employeesBR.RData'))
 ```
 
 ```{r}
 dt <- left_join(x = dt, y= lkt, by = c('division_num'='division_num'))
 ```
 
-##Introduction
+## Introduction
 
 This is my analysis for **Baton Rouge** for year *2016*.
 
-##Data Inspection
+## Data Inspection
 
 ```{r}
 #dt %>% distinct(department_name) %>% nrow
@@ -40,7 +42,9 @@ There are a total of `r length(unique(dt$department_name))` departments in this 
 
 ```{r}
 employeesCount <- dt %>% group_by(department_name) %>% summarise(count = n())
-
+#employeesCount1 <- dt %>% count(department_name) 
+#employeesCount1 <- dt %>% tally(department_name) 
+knitr::kable(employeesCount) #you can use knitr::kable for better formatting
 hh <- employeesCount %>% arrange(desc(count))
 ```
 
@@ -53,18 +57,24 @@ hh <- employeesCount %>%
 
 The total number for MOSQUITO & RODENT CONTROL is `r hh$count`
 
-##Data Preparation
+## Data Preparation
 
 
 ```{r}
 dt <- dt %>% 
           filter(department_name != 'COUNCIL ADMINISTRATOR')
-#another way to negate an equality test filter(!(department_name == 'COUNCIL ADMINISTRATOR'))
+#negation could also go at the beginning (!(department_name == 'COUNCIL ADMINISTRATOR'))
 ```
 
 ```{r}
 retir <- dt %>% select(department_name, end_date) %>% mutate(retirement = !is.na(end_date)) %>% 
   count(department_name, retirement)
+# you could check with spread whether the result is correct 
+# spread(retir, retirement, n, fill = 0)
+```
+
+```{r}
+retir <- arrange(retir, retirement, desc(n))
 ```
 
 
@@ -74,7 +84,6 @@ retir %>%
   mutate(totEmplyees = sum(n)) %>% 
   filter(retirement == T) %>% 
   mutate(perc = n/totEmplyees) 
-#if you wish, you may pipe a knitr::kable() to your tables to knit using a more readable layout. But you need to install "knitr" first.
 ```
 
 
@@ -84,7 +93,7 @@ hh <- retir %>% group_by(retirement) %>% summarise(tot = sum(n))
 
 The toal employees who retired are `r filter(hh, retirement == T) %>% select(tot)` those who did not `r filter(hh, retirement == F) %>% select(tot)`
 
-##Data Visualization
+## Data Visualization
 
 ```{r}
 ggplot(data = retir ) +
@@ -94,20 +103,19 @@ ggplot(data = retir ) +
 ```
 
 ```{r}
-salary <- dt %>% group_by(department_name) %>% summarise(avg=mean(base_pay)) %>% 
-  arrange(desc(avg))
-# filter(salary, avg == max(avg)) this solution is superior because it gives you the right result even if you fail arranging
-# slice(salary, 1)
-# salary[1,]
+salary <- dt %>% group_by(department_name) %>% summarise(avg=mean(base_pay))
+ggplot(data = salary ) +
+  geom_col(aes(x = department_name, y = avg)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 The department that pays the most is: `r  filter(salary, avg == max(avg))`
 
-##Data Analysis
+## Data Analysis
 
 ```{r}
-salary %>% arrange(desc(avg)) %>% slice(1:10)  
-#salary %>% arrange(desc(avg)) %>% top_n(10)
+arrange(salary, desc(avg)) %>% slice(1:10)
+# or top_n(salary, 10, avg)
 #both solutions are acceptable in this case but note the diff between:
 # data_frame(var1 = rep(10, 10)) %>% top_n(2)
 # data_frame(var1 = rep(10, 10)) %>% slice(1:2)
