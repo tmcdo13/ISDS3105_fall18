@@ -8,7 +8,16 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(fivethirtyeight)
 load(here::here('data', 'dataset.RData'))
+```
+```{r}
+  fivethirtyeight::drug_use %>%
+  select( age, alcohol_use, cocaine_use, marijuana_use,n) %>%
+  gather(key = 'DrugType', value = 'percent',-age,-n) %>%
+  filter(age %in% c('18','19','20','21','22-23')) %>%
+  ggplot() + geom_bar(aes(x = DrugType, y = percent, fill = DrugType), stat = 'identity') + facet_wrap(~age) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
 
 
@@ -82,14 +91,22 @@ selfiesCasualties %>%
 
 1. Using `titanicDt`, filter the count of female children who did not survive
 ```{r}
+<<<<<<< HEAD
 titanicDt %>%
   filter(Sex == 'Female', Age == 'Child', Survived == 'No')
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `beerDt`, filter the records from 1903 to 1997 (use the shortcut `dplyr::between()`)
 ```{r}
+<<<<<<< HEAD
 beerDt %>%
   filter(between(Year, 1903, 1997))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 3. Using `untidyReview`, filter all records with missing values on `reviewLocation`. Hint: you need to use `is.na()` to test what elements are missing.
@@ -124,14 +141,22 @@ Note that `distinct` will also automatically drop all columns that are not passe
 
 1. Using `selfiesCasualties`, subset the dataset by the distinct levels for `class`
 ```{r}
+<<<<<<< HEAD
 selfiesCasualties %>%
   distinct(class, .keep_all = TRUE)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `titanicDt`, create a 2 columns dataset for the unique combinations of `Age` and `Sex`
 ```{r}
+<<<<<<< HEAD
 titanicDt %>%
   distinct(Age, Sex)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 
@@ -147,13 +172,21 @@ selfiesCasualties %>%
 
 1. Using `titanicDt`, arrange by Class, Age, Sex
 ```{r}
+<<<<<<< HEAD
 titanicDt %>%
   arrange(Class, Age, Sex)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `titanicDt`, arrange descending by `n`
 ```{r}
+<<<<<<< HEAD
 titanicDt %>% arrange(desc(n))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 ## Manipulate Columns
@@ -170,14 +203,22 @@ To select multiple columns, you can use `class:age` (from variable class to vari
 
 1. Using `sn_revenue`, select only variables for company names and year 2015.
 ```{r}
+<<<<<<< HEAD
 sn_revenue %>%
   select(y2015)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `untidyReview`, select only the variables containing review ratings.
 ```{r}
+<<<<<<< HEAD
 untidyReview %>%
   select(-reviewId, -reviewStayYear)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 
@@ -190,20 +231,32 @@ selfiesCasualties %>%
 
 1. Using `beerDt`, convert the consumption from gallons per capita to liters (1 gallon 3.78 liters)
 ```{r}
+<<<<<<< HEAD
 beerDt %>%
   mutate(LitersCapita = GallonsCapita * 3.78)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `socialNetwork_users` add a percent sign to the variable percent (use `paste0()`)
 ```{r}
+<<<<<<< HEAD
 socialNetwork_users %>%
   mutate(percent = paste0(percent,'%'))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 3. Using `untidyReview`, turn `reviewStayYear` into a integer
 ```{r}
+<<<<<<< HEAD
 untidyReview %>%
   mutate(reviewStayYear = as.numeric(reviewStayYear))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 
@@ -219,18 +272,26 @@ selfiesCasualties %>%
 
 1. Using `titanicDt`, calculate the average casualties by class (note that the dataset has both survivors/non-survivors counts)
 ```{r}
+<<<<<<< HEAD
 titanicDt %>%
   filter(Survived == 'No') %>%
   group_by(Class) %>%
   summarize(avg = mean(n))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 2. Using `titanicDt`, calculate the average casualties by gender (note that the dataset has both survivors/non-survivors counts)
 ```{r}
+<<<<<<< HEAD
 titanicDt %>%
   filter(Survived == 'No') %>%
   group_by(Sex) %>%
   summarize(avg = mean(n))
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 3. Using `beerDt`, calculate the average consumption before and after your birthyear (hint: you may create a new variable)
@@ -325,11 +386,15 @@ if (!require(nycflights13)) install.packages('nycflights13')
 1. Use the appropriate join to add the full carrier names to `flights` using `airlines` :
 
 ```{r}
+<<<<<<< HEAD
 #flights %>%
 #full_join(airlines, c('carrier' = 'carrier'))
 #glimpse(flights)
 full_join(flights, airlines)
 glimpse(flights)
+=======
+
+>>>>>>> 0e31ce146d396c53753248b3d2c60643bd2db790
 ```
 
 
