@@ -1,0 +1,69 @@
+---
+title: "ISDS Mid-term Exam"
+author: "Tyler McDonald"
+date: "September 26, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+load(file = 'employeesBR.RData')
+dt <- dt %>% left_join(lkt)
+```
+
+## Introduction
+
+  In the dataset **dt** which has been joined with dataset **lkt**, there are *`r length(dt)`* rows.
+  
+## Data Inspection
+
+  There are a total of `r count(distinct(dt[3]))` departments in this dataset.
+
+```{r}
+employee_count <- dt %>% group_by(department_name) %>% count(department_name) %>% arrange(desc(n))
+employee_count
+```
+
+  The departments in order of number of employees are as follows: `r employee_count$department_name`. The total number of observations in MOSQUITO & RODENT CONTROL IS `r employee_count$n[25]`.
+
+## Data Preparation
+
+```{r}
+dt <- dt %>% filter(department_name != 'COUNCIL ADMINISTRATOR')
+retire <- dt %>% mutate(retirement = if_else(is.na(end_date), FALSE, TRUE)) %>% group_by(department_name) %>% count(retirement)
+retir <- arrange(retire,retirement,desc(n))
+```
+
+```{r}
+retir %>% group_by(department_name) %>% mutate(total = sum(n)) %>% filter(retirement == TRUE) %>% mutate(percent = n/total)
+```
+
+```{r}
+retir2 <- retir %>% group_by(retirement) %>% summarise(total = sum(n))
+retir2
+```
+
+A total of `r retir2$total[2]` people retired while `r retir2$total[1]` did not.
+
+## Data Visualization
+
+```{r}
+ggplot() + geom_bar(aes(x = retir$department_name, weight = retire$n)) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+avg_base_pay <- dt %>% group_by(department_name) %>% summarise(average = mean(base_pay))
+ggplot(data = avg_base_pay) + geom_bar(aes(x = department_name, weight = average)) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+avg_base_pay
+```
+
+The department with the largest base pay is `r filter(avg_base_pay, average == max(average))`.
+
+```{r}
+avg_base_pay %>% arrange(desc(average)) %>% slice(1:10)
+```
+
+```{r}
+dt %>% mutate(costOvertime = overtime_hourly_rate * total_overtime_hours) %>% group_by(department_name) %>% summarise(average = mean(costOvertime)) %>% arrange(desc(average)) %>% slice(1:3)
+```
