@@ -101,8 +101,6 @@ select(bad_drivers, state, perc_speeding, perc_alcohol) %>%
         axis.text = element_blank(), 
         axis.ticks = element_blank(),
         legend.title = element_text(face = 'bold'))
-
-knitr::kable(distinct(dt, state, hazardType, perc) %>% spread(hazardType, perc))
 ```
 
 Similarly to any other geoms, you can map more variables to the other aes available form `geom_polygon`. For instance, you can map a variable to the transparency using `alpha`
