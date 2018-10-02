@@ -1,7 +1,5 @@
-Lesson 12: Geospatial Visualization
+Lesson 09: Geospatial Visualization
 ================
-
-# Geospatial Visualization
 
 In ggplot2 you can draw maps using polygons to indicate geographical
 areas. To draw a polygon, use `geom_polygon` and a dataset of x-y
