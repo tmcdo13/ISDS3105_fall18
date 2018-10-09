@@ -6,7 +6,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = F)
+knitr::opts_chunk$set(echo = TRUE, message = F, collapse = T)
 ```
 
 ```{r}
@@ -86,7 +86,7 @@ typeof(someDates)
 
 After coercing to date, to extract single components from each date object:
 
-```{r}
+```{r, collapse=TRUE}
 day(ymd(myDate))
 week(ymd(myDate)) 
 month(ymd(myDate)) 
