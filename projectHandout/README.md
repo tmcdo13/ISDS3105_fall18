@@ -147,7 +147,7 @@ of your choice. Some of the aspects that would make a good project are:
     plotting, creating a template for your pdf reports, use statistical
     modeling, add interactivity to ggplot charts.
 
-3.  \*\*Integrate external resources\*. Looking at the bigger picture is
+3.  **Integrate external resources**. Looking at the bigger picture is
     sometimes critical to fully understand what the data might tell us.
     Variables such as crime rates might be more meaningful when combined
     with income data. However, that information may not be available

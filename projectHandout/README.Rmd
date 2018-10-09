@@ -94,7 +94,7 @@ This project is the chance for you to explore the magnificent world of R. The ma
   
   #. **Explore new tools**, for instance: using new libraries for plotting, creating a template for your pdf reports, use statistical modeling, add interactivity to ggplot charts.
   
-  #. **Integrate external resources*. Looking at the bigger picture is sometimes critical to fully understand what the data might tell us. Variables such as crime rates might be more meaningful when combined with income data. However, that information may not be available from Open Data BR.
+  #. **Integrate external resources**. Looking at the bigger picture is sometimes critical to fully understand what the data might tell us. Variables such as crime rates might be more meaningful when combined with income data. However, that information may not be available from Open Data BR.
   
   #. What did you find? Do not overreach with when presenting your **findings** and be aware of your **limitations**. 
   
