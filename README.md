@@ -1,8 +1,5 @@
-## ISDS3105: Internet Development Tools - R programming (Fall 2018) 
+![](pics/header.png)
 
-**T-Th, 3.00-4.20 PM, 1835 Business Education Complex**
-
-**Office Hours: Tu–Th 4.30–5.30 PM, 2400b BEC**
 
 **Required Text**:	Wickham, H., & Grolemund, G. (2016). [R for data science](http://r4ds.had.co.nz/)
 
