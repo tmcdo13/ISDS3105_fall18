@@ -16,7 +16,7 @@ library(tidyverse)
 
 ## Introduction
 
-To have the right class associated to date/time data is crucial to manipulate them effectively. Dates often come as strings, but R will not make any assumption about your intention to create a date until to specify so. For instance, suppose we want to calculate the distance between two dates:
+To have the right class associated to date/time data is crucial to manipulate them effectively. Dates often come as strings, but R will not make any assumption about your intention to create a date until you specify so. For instance, suppose we want to calculate the distance between two dates:
 
 ```{r, error=TRUE}
 myDate <- c("2018-03-19", "2018-03-20")

@@ -9,7 +9,7 @@ library(tidyverse)
 
 To have the right class associated to date/time data is crucial to
 manipulate them effectively. Dates often come as strings, but R will not
-make any assumption about your intention to create a date until to
+make any assumption about your intention to create a date until you
 specify so. For instance, suppose we want to calculate the distance
 between two dates:
 
@@ -82,7 +82,7 @@ library(lubridate)
 today()
 ## [1] "2018-10-09"
 now()
-## [1] "2018-10-09 11:02:23 CDT"
+## [1] "2018-10-09 14:54:43 CDT"
 wday(now(), label = T, abbr = F)
 ## [1] Tuesday
 ## 7 Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < ... < Saturday
