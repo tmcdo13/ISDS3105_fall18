@@ -1,9 +1,6 @@
 ---
 title: "Final Project"
-output: 
-   rmarkdown::github_document:
-    toc: true
-    toc_depth: 2
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
