@@ -26,7 +26,7 @@ apiEndpoint <- 'https://data.brla.gov/resource/uqxt-dtpe.csv?'
 #' learn how to write queries: https://dev.socrata.com/
 #' list of functions: https://dev.socrata.com/docs/functions/
 
-#' the period of interest corresponds to the state of emergency
+#' our period of interest is during the declaration of the state of emergency
 #' https://en.wikipedia.org/wiki/2016_Louisiana_floods
 query <- "$where=createdate between '2016-08-12' and '2016-08-22'"
 
@@ -38,10 +38,6 @@ dt_311 <- dt_311 %>%
               mutate(geolocation = str_extract_all(geolocation, '[-,.,0-9]+')) %>% 
               mutate(long = map_chr(geolocation, 1), lat = map_chr(geolocation, 2)) %>% 
               mutate_at(vars(long, lat), as.double) # same as mutate(long = as.double(long), lat = as.double(lat))
-  
-
-dt_311 %>% 
-  filter(parenttype == "DRAINAGE, EROSION, FLOODING OR HOLES")
 
 
 #' Register to the Google Maps Static API: 
