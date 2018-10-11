@@ -103,6 +103,8 @@ indundationArea <- fortify(indundationArea)
 m <- ggmap::ggmap(brMap) +  
       geom_polypath(data = indundationArea, aes(x = long, y = lat, group=group), fill = 'blue', alpha=.2) 
 
+#' It can take a while to load the map in the viewer. 
+#' You might want to save it as .png to retrieve them faster:
 ggsave('shapemapFlood.png', m, path = here('lectures/lesson11_openData/'))
 
 
