@@ -9,6 +9,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 library(tidyverse)
 library(fivethirtyeight)
+library(maps)
 ```
 
 
