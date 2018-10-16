@@ -158,7 +158,7 @@ t %>% mutate(nums = map_chr(.x = nums, 'b', .default = NA))
 
 ## Rethinking assignment 4: iterating ggplot() function calls
 
-Assignment 4 asked to plot a map of insurance premiums of the Southern States only. Below is an approach to rethink at that problem in case we had to plot multiple regions on different maps. Since each map will show the same variables, we can think about iterating the call to `ggplot()`:
+Assignment 4 asked to plot a map of insurance premiums for the South US only. Below are two approaches to rethink at that problem in a more scalable way, for instance assuming we wanted to plot multiple regions on different maps. Since each map will show the same variables, we can think about iterating the call to `ggplot()`:
 
 ```{r}
 states <- map_data("state") #load the shapefile of US states

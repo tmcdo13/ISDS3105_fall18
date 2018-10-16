@@ -115,9 +115,9 @@ microbenchmark(
   }
 )
 ## Unit: nanoseconds
-##               expr  min   lq    mean median   uq   max neval cld
-##   preparringOutput 2137 2425 2935.51   2601 2740 32333   100   b
-##  withoutPreparring  122  140  161.96    147  164   804   100  a
+##               expr  min   lq    mean median     uq   max neval cld
+##   preparringOutput 2312 2457 2855.92 2575.5 2726.5 22214   100   b
+##  withoutPreparring  122  146  162.69  154.0  161.5   811   100  a
 ```
 
 ## Iterate using `purrr::map()`
@@ -154,9 +154,9 @@ microbenchmark(
   }
 )
 ## Unit: microseconds
-##      expr     min       lq     mean   median       uq     max neval cld
-##   withMap 116.461 117.3570 135.2680 118.2920 124.4205 313.864   100  a 
-##  withLoop 245.039 247.6915 262.6345 248.7635 253.6510 540.832   100   b
+##      expr     min      lq     mean  median       uq      max neval cld
+##   withMap 115.925 118.498 129.6195 120.668 124.6065  316.146   100  a 
+##  withLoop 245.473 249.031 285.7292 252.582 255.9295 1053.728   100   b
 ```
 
 To pass the arguments of the function `.f`, when have to options:
@@ -222,10 +222,11 @@ t %>% mutate(nums = map_chr(.x = nums, 'b', .default = NA))
 
 ## Rethinking assignment 4: iterating ggplot() function calls
 
-Assignment 4 asked to plot a map of insurance premiums of the Southern
-States only. Below is an approach to rethink at that problem in case we
-had to plot multiple regions on different maps. Since each map will show
-the same variables, we can think about iterating the call to `ggplot()`:
+Assignment 4 asked to plot a map of insurance premiums for the South US
+only. Below are two approaches to rethink at that problem in a more
+scalable way, for instance assuming we wanted to plot multiple regions
+on different maps. Since each map will show the same variables, we can
+think about iterating the call to `ggplot()`:
 
 ``` r
 states <- map_data("state") #load the shapefile of US states
