@@ -1,14 +1,21 @@
-Assignment 5
+Assignment 4
 ================
 
-Trump's Tweets
-==============
+# Trump’s Tweets
 
-Read the below dataset on from <https://github.com/fivethirtyeight/data/tree/master/trump-twitter>. Then use the appropriate function from the package `lubridate` to convert `created_at` into a date.
+Read the below dataset on from
+<https://github.com/fivethirtyeight/data/tree/master/trump-twitter>.
+Then use the appropriate function from the package `lubridate` to
+convert `created_at` into a date.
 
-Use `geom_histogram` to plot a histogram of tweets count. Change the x-axis title into 'date' and the x-axis labels into a `mon 'yy` format (e.g., `Dec '15`).
+Use `geom_histogram` to plot a histogram of tweets count. Change the
+x-axis title into ‘date’ and the x-axis labels into a `mon 'yy` format
+(e.g., `Dec '15`).
 
-Note that there is a difference between time and datetime: If you coerce `created_at` to a datetime (which keeps information about the time too), you will need `scale_x_datetime` instead of `scale_x_date`
+Note that there is a difference between time and datetime: If you coerce
+`created_at` to a datetime (which keeps information about the time too),
+you will need `scale_x_datetime` instead of
+`scale_x_date`
 
 ``` r
 dt <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/trump-twitter/realDonaldTrump_poll_tweets.csv') %>%
@@ -16,10 +23,13 @@ dt <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/tr
   ggplot() + geom_histogram(aes())
 ```
 
-Income map
-==========
+# Income map
 
-Use the below dataset to plot a choropleth map of incomes by state. Map `median_household_income` to the state fill. For a shapefile of the US states use `map_data("state")`. Adjust the legend setting the title to "Median income" and formatting the scale as `$xx,xxx`.
+Use the below dataset to plot a choropleth map of incomes by state. Map
+`median_household_income` to the state fill. For a shapefile of the US
+states use `map_data("state")`. Adjust the legend setting the title to
+“Median income” and formatting the scale as
+`$xx,xxx`.
 
 ``` r
 dt <- read_csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/hate-crimes/hate_crimes.csv')
@@ -30,6 +40,7 @@ states<- right_join(states, MHI, by= c( 'region'='state'))
 ggplot(data = states) + geom_polygon(aes(x = long, y = lat, group = group, fill = median_household_income ), color = "white") + coord_fixed(1.3)+ labs(title = 'Median income')
 ```
 
+<<<<<<< HEAD
 ![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 Repeat the above for the Deep South only (Louisiana, Alabama, Mississippi, Georgia, South Carolina). Add a title.
@@ -55,3 +66,10 @@ dt <- filter(dt, state == "Louisiana")
 ```
 
 The median income is 42406 and the Gini-Index for Louisiana is 0.475.
+=======
+Repeat the above for the Deep South only (Louisiana, Alabama,
+Mississippi, Georgia, South Carolina). Add a title.
+
+Use inline code to output the median income (appropriately formatted)
+and the Gini-Index for Louisiana.
+>>>>>>> 123d633cbce9d4a12afdf6141718d276078224cc
