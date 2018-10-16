@@ -71,7 +71,7 @@ for (...) {     # sequence
 }
 ```
 
-Note how "filling" `t` is more efficient than adding an element to `t` at each iteration:
+Note how "filling" `t` is more efficient than iteratively add elements to `t` using indexing:
 
 ```{r}
 library(microbenchmark)

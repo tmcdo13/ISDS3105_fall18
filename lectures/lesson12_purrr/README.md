@@ -1,4 +1,4 @@
-Iterating with purrr::map()
+Iterations
 ================
 
 ``` r
@@ -44,15 +44,12 @@ One way of iterating is by using a for-loop. For loops have three
 elements: output, sequence, body
 
 ``` r
-showType <- function(x) typeof(x)
+
 x <- list(1, 'hi', TRUE, T) 
 
 output <- vector("list", length(x))  # output
-
 for (i in seq_along(x)) {            # sequence
-  
-  output[i] <- showType(x[[i]])      # body
-  
+  output[i] <- typeof(x[[i]])        # body
 }
 
 output
@@ -95,8 +92,8 @@ for (...) {     # sequence
 ##            ^
 ```
 
-Note how “filling” `t` is more efficient than adding an element to `t`
-at each iteration:
+Note how “filling” `t` is more efficient than iteratively add elements
+to `t` using indexing:
 
 ``` r
 library(microbenchmark)
@@ -105,33 +102,32 @@ microbenchmark(
   #below is the code for the for-loop specifing the dimensions of `output`
   preparringOutput = {
    output <- vector("double", length(t$x))  
-   ##########################################
-   ## copy here the code for your for-loop ##
-   ##########################################
+   #########################################
+   ## copy here the code for the for-loop ##
+   #########################################
   },
   #below is the same for-loop WITHOUT specifing the dimensions of `output`
   withoutPreparring =   { 
     output <- NULL
-   ##########################################
-   ## copy here the code for your for-loop ##
-   ##########################################
+   #########################################
+   ## copy here the code for the for-loop ##
+   #########################################
   }
 )
 ## Unit: nanoseconds
-##               expr  min     lq    mean median   uq   max neval cld
-##   preparringOutput 2195 2535.5 3173.37   2754 2978 36394   100   b
-##  withoutPreparring  120  141.0  167.31    148  159   907   100  a
+##               expr  min   lq    mean median   uq   max neval cld
+##   preparringOutput 2137 2425 2935.51   2601 2740 32333   100   b
+##  withoutPreparring  122  140  161.96    147  164   804   100  a
 ```
 
 ## Iterate using `purrr::map()`
 
-Using the purrr package, we can imitate the behavior of the for-loop
-using `purrr::map()` (check `?map` for an overview of all the functions
-within the map family):
+We can imitate for-loop iterations using `purrr::map()` (check `?map`
+for an overview of all the functions within the map family):
 
 ``` r
 x <- list(1, 'hi', TRUE, T) 
-map(.x = x, .f = showType)
+map(.x = x, .f = typeof)
 ## [[1]]
 ## [1] "double"
 ## 
@@ -145,22 +141,22 @@ map(.x = x, .f = showType)
 ## [1] "logical"
 ```
 
-Besides having a more concise syntax, iterations with map are also
-faster:
+The main advantage of using `map()` is to have a more concise syntax,
+but note how iterations with map are also faster:
 
 ``` r
 x <- rep(x, 50)
 microbenchmark(
-  withMap = { map(x, showType) },
+  withMap = { map(x, typeof) },
   withLoop = {
     output <- vector("list", length(x)) 
-    for (i in seq_along(x)) { output[i] <- showType(x[[i]]) }
+    for (i in seq_along(x)) { output[i] <- typeof(x[[i]]) }
   }
 )
 ## Unit: microseconds
 ##      expr     min       lq     mean   median       uq     max neval cld
-##   withMap 122.872 124.3655 128.7113 125.2105 126.8935 195.664   100  a 
-##  withLoop 251.503 253.8050 260.3436 255.0895 258.2250 366.550   100   b
+##   withMap 116.461 117.3570 135.2680 118.2920 124.4205 313.864   100  a 
+##  withLoop 245.039 247.6915 262.6345 248.7635 253.6510 540.832   100   b
 ```
 
 To pass the arguments of the function `.f`, when have to options:
