@@ -165,8 +165,7 @@ Assignment 4 asked to plot a map of insurance premiums for the South US only. Be
 states <- map_data("state") #load the shapefile of US states
 # create a variable to split by US-region
 bad_driversSouth <- bad_drivers %>%
-                        mutate(isSouth = case_when(state %in% c('Louisiana', 'Alabama', 'Mississippi', 'Georgia', 'South Carolina') ~ 'South',
-                                                   T ~ 'Other'),
+                        mutate(isSouth = case_when(state %in% c('Louisiana', 'Alabama', 'Mississippi', 'Georgia', 'South Carolina') ~ 'South', T ~ 'Other'),
                                state = tolower(state))
 
 
@@ -204,6 +203,21 @@ bad_driversNested$chart[1]
 #' Follow one of the 2 approaches above or to come up with your own, but don't 
 #' forget to iterate the call to ggplot() rather then typing it down multiple times
 mountainStates <- c('Montana', 'Wyoming', 'Colorado', 'New Mexico', 'Idaho', 'Utah', 'Arizona', 'Nevada')
+states <- map_data("state") #load the shapefile of US states
+# create a variable to split by US-region
+bad_driversSouth <- bad_drivers %>%
+                        mutate(isMountain = case_when(state %in% c('Louisiana', 'Alabama', 'Mississippi', 'Georgia', 'South Carolina') ~ 'South', state %in% mountainStates ~ 'Mountain', T ~ 'Other')) %>%
+state = tolower(state)
+
+bad_driversSouth %>% 
+  split(.$isMountain) %>% 
+  purrr::map(~ right_join(.x, states, by = c('state' = 'region')) %>% 
+                      filter(!is.na(insurance_premiums)) %>% 
+                      ggplot() +
+                      geom_polygon(aes(x = long, y = lat, group = group, fill = insurance_premiums), color = "white") + 
+                      coord_fixed(1.3) +
+                      labs(title = paste('Insurance premiums')))
+  
 
 ```
 
