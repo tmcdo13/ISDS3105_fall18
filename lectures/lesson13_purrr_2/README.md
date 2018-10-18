@@ -6,6 +6,12 @@ library(tidyverse)
 library(fivethirtyeight)
 ```
 
+The example below shows how to iterate a call to ggplot() over multiple
+arguments. In particular, we want to iterate over different datasets and
+different names to create multiple charts of a subset of data. We will
+use the same logic when knitting parametrized reports in RMarkdown, so
+understanding how `map()` works can really help you to scale up things.
+
 ``` r
 #Consider the dataset
 bad_driversSouth <- bad_drivers %>% 
@@ -37,16 +43,29 @@ drawMap <- function(data, title) {
 }
 
 bad_driversNested <- bad_driversNested %>% 
-  mutate(stateMap = pmap(list(data = .$stateShape, title = .$isSouth), drawMap))
+  mutate(stateMap = pmap(list(data = .$stateShape, title = .$isSouth), .f = drawMap))
 # OR: mutate(stateMap = map2(.x = .$stateShape, .y = .$isSouth, drawMap)) 
 ```
 
 ## Invoking different functions
 
-We want to plot the correlation between insurance\_premiums and
-losses
+With `map` can iterate one function over multiple elements. For
+iterating multiple function over one parameters We want to plot the
+correlation between insurance\_premiums and losses
 
 ``` r
+#calculate variance, correlation, covariance
+invoke_map(list(var, cor, cov), list(list(x = bad_drivers$insurance_premiums, y = bad_drivers$perc_alcohol)))
+## [[1]]
+## [1] -15.96835
+## 
+## [[2]]
+## [1] -0.01745071
+## 
+## [[3]]
+## [1] -15.96835
+
+#calculate mean and median for one variable
 invoke_map(list(avg = mean, IIQ = median), x = bad_drivers$insurance_premiums)
 ## $avg
 ## [1] 886.9576
@@ -60,7 +79,7 @@ invoke_map_df(list(avg = mean, IIQ = median), x = bad_drivers$insurance_premiums
 ## 1  887.  859.
 ```
 
-Although for tasks like the above is easier to functionally execute the
+Although for tasks like the above is easier to use variations of the
 dplyr verbs we already familiarized
 with:
 
@@ -92,8 +111,6 @@ bad_drivers %>% mutate_if(is.integer, .funs = funs(paste0(., '%')))
 ## 10 Flor…        17.9 21%           29%          92%             
 ## # ... with 41 more rows, and 3 more variables: perc_no_previous <chr>,
 ## #   insurance_premiums <dbl>, losses <dbl>
-bad_drivers %>% mutate_all(starts_with('perc'), .funs = funs(paste0(., '%')))
-## Error: No tidyselect variables were registered
 bad_drivers %>% mutate_at(vars(starts_with('perc')), .funs = funs(paste0(., '%')))
 ## # A tibble: 51 x 8
 ##    state num_drivers perc_speeding perc_alcohol perc_not_distra…

@@ -49,14 +49,18 @@ bad_driversNested <- bad_driversNested %>%
 
 ## Invoking different functions
 
-We want to plot the correlation between insurance_premiums and losses
+With `map` can iterate one function over multiple elements. For iterating multiple function over one parameters We want to plot the correlation between insurance_premiums and losses
 
 ```{r}
+#calculate variance, correlation, covariance
+invoke_map(list(var, cor, cov), list(list(x = bad_drivers$insurance_premiums, y = bad_drivers$perc_alcohol)))
+
+#calculate mean and median for one variable
 invoke_map(list(avg = mean, IIQ = median), x = bad_drivers$insurance_premiums)
 invoke_map_df(list(avg = mean, IIQ = median), x = bad_drivers$insurance_premiums)
 ```
 
-Although for tasks like the above is easier to functionally execute the dplyr verbs we already familiarized with:
+Although for tasks like the above is easier to use variations of the dplyr verbs we already familiarized with:
 
 ```{r}
 bad_drivers %>% summarise(mean = mean(num_drivers), median = median(num_drivers))
@@ -65,7 +69,6 @@ bad_drivers %>% summarise_at(vars(num_drivers), .funs = funs(mean, median))
 bad_drivers %>% mutate_if(is.integer, .funs = funs(paste0(., '%')))
 bad_drivers %>% mutate_at(vars(starts_with('perc')), .funs = funs(paste0(., '%')))
 ```
-
 
 
 ## Exercise
