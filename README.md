@@ -76,7 +76,7 @@ We adopt the standard LSU +/- grading scale without any forced curve. The breakd
 | Thursday, October 25  | WebScraping        | Assignment5 Assingnment on OpenData Map  | lesson17  
 | Tuesday, October 30   | Regression              |                | lesson18   
 | Thursday, November 1  | Regression              | ~Assignment6~               | lesson19  
-| Tuesday, November 6   | ~~Regression~~  Parametrized Reports        | ~Assignment6~         | lesson20   
+| Tuesday, November 6   | ~~Regression~~  Parametrized Reports        | Assignment6         | lesson20   
 | Thursday, November 8  | Dashoboards with RMarkdown    |                | lesson21  
 | Tuesday, November 13  | Supervised lab - group project |      |                           |
 | Thursday, November 15 | Supervised lab - group project        |    Assignment7            |    
