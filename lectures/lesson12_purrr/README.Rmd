@@ -206,8 +206,7 @@ mountainStates <- c('Montana', 'Wyoming', 'Colorado', 'New Mexico', 'Idaho', 'Ut
 states <- map_data("state") #load the shapefile of US states
 # create a variable to split by US-region
 bad_driversSouth <- bad_drivers %>%
-                        mutate(isMountain = case_when(state %in% c('Louisiana', 'Alabama', 'Mississippi', 'Georgia', 'South Carolina') ~ 'South', state %in% mountainStates ~ 'Mountain', T ~ 'Other')) %>%
-state = tolower(state)
+                        mutate(isMountain = case_when(state %in% c('Louisiana', 'Alabama', 'Mississippi', 'Georgia', 'South Carolina') ~ 'South', state %in% mountainStates ~ 'Mountain', T ~ 'Other'),state = tolower(state))
 
 bad_driversSouth %>% 
   split(.$isMountain) %>% 
