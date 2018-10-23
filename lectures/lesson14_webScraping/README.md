@@ -1,4 +1,4 @@
-lesson 16: Web Scraping
+lesson 14: Web Scraping
 ================
 
 # Introduction
