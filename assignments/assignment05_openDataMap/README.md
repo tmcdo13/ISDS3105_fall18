@@ -34,18 +34,17 @@ query <- "$where=disp_date between '2016-08-12' and '2016-08-22'"
 dt_fire <- read.socrata(paste0(apiEndpoint2, query), app_token = token[['app']])
 dt_fire <- as_tibble(dt_fire)
 dt_fire <- dt_fire %>% 
-  mutate(geolocation = str_extract_all(geolocation, '[-,.,0-9]+')) %>% 
+  mutate(geolocation = str_extract_all(geolocation, '[-,.,0-9]+')) %>%
   mutate(long = map_chr(geolocation, 1), lat = map_chr(geolocation, 2)) %>% 
   mutate_at(vars(long, lat), as.double)
 query <- "$where=offense_date between '2016-08-12' and '2016-08-22'"
 dt_911 <- read.socrata(paste0(apiEndpoint3, query), app_token = token[['app']])
 dt_911 <- as_tibble(dt_911)
 dt_911 <- dt_911 %>% 
-  mutate(geolocation = str_extract_all(geolocation, '[-,.,0-9]+')) %>% 
+  mutate(geolocation = str_extract_all(geolocation, '[-,.,0-9]+')) %>%
   mutate(long = map_chr(geolocation, 1), lat = map_chr(geolocation, 2)) %>% 
   mutate_at(vars(long, lat), as.double)
-#ggmap::register_google(key = googleAPIkey)
 brMap <- readRDS(here::here('data/mapTerrainBR.RDS'))
 ggmap::ggmap(brMap) +
-  geom_point(data = filter(dt_311, parenttype == "DRAINAGE, EROSION, FLOODING OR HOLES"), aes(x = long, y = lat), color = 'darkred', alpha = .33) + geom_point(data = filter(dt_fire, parenttype == "SEVERE WEATHER OR NATURAL DISASTER, OTHER, OR WATER EVACUATION"), aes(x = long, y = lat), color = 'blue', alpha = .33) + geom_point(data = filter(dt_911, parenttype == "LOOTING"), aes(x = long, y = lat), color = 'green', alpha = .33) + ggtitle('Position of calls to 311, Fire Brigade, and 911')
+  geom_point(data = filter(dt_311, parenttype == "DRAINAGE, EROSION, FLOODING OR HOLES"), aes(x = long, y = lat), color = 'darkgreen', alpha = .33) + geom_point(data = filter(dt_fire, inci_descript == "SEVERE WEATHER OR NATURAL DISASTER, OTHER, OR WATER EVACUATION"), aes(x = long, y = lat), color = 'darkred', alpha = .33) + geom_point(data = filter(dt_911, offense_desc == "LOOTING"), aes(x = long, y = lat), color = 'darkblue', alpha = .33) + ggtitle('Position of calls to 311, Fire Brigade, and 911')
   
