@@ -13,7 +13,7 @@ heat and the daily number of crimes in Baton Rouge.
 #source(here::here('lectures', 'lesson15_regression', 'scraperForTemperature.R'))
 dt_temp <- read_rds(here::here('lectures', 'lesson15_regression', 'data', 'temperatures.rds'))
 #' RSocrata-BR Open Data
-#source(here::here('lectures', 'lesson15_regression', 'callAPI.R'))
+#' source(here::here('lectures', 'lesson15_regression', 'callAPI.R'))
 dt_crimes <- read_rds(here::here('lectures', 'lesson15_regression', 'data', 'crimes.rds'))
 #merge the two dataset
 dt_crimes <- dt_crimes %>% left_join(dt_temp, by = c('offense_date' = 'Day'))
@@ -44,6 +44,13 @@ ggplot(data = dt_crimes, aes(x = TempHigh, y = n)) +
 ```
 
 ![](README_files/figure-gfm/visualizing%20a%20lm-1.png)<!-- -->
+
+`se` is for displaying confidence intervals (95% by default). The
+interpretation of confidence intervals it *not* a probability of being
+right. Check [this animation](http://rpsychologist.com/d3/CI/) for a
+brief explanation. It is a range of plausible values for the population
+paremeter being estimated along with the estimation
+procedure.
 
 ``` r
 fit <- glm(n ~ TempHigh, family = poisson(link = 'log'), data = dt_crimes)
@@ -191,9 +198,10 @@ fit2 <- glm(n ~ TempHigh + Precip, family = poisson(link = 'log'), data = dt_cri
 
 ### Exercise
 
-  - Calculate a prediction interval for the number of crimes for a day
-    with a max temperature of 84 and no rain, and another day with max
-    temperature 84 and 2 inches of rain.
+  - Using `fit`, calculate a prediction interval for the number of
+    crimes for a day with a max temperature of 84 and no rain, and
+    another day with max temperature 84 and 2 inches of rain.
+
   - Plot the residuals for fit2 and analyze them. Select 1-2
     observations the particularly misbehave and think about possible
     causes (e.g. gameday? mardi-gras?)

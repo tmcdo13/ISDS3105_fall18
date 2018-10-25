@@ -44,7 +44,7 @@ ggplot(data = dt_crimes, aes(x = TempHigh, y = n)) +
   ggtitle('Count of crimes and daily Temperature') 
 ```
 
-`se` is for displaying confidence intervals (95% by default). The interpretation of confidence intervals it *not* a probability of being right. Check [this animation](http://rpsychologist.com/d3/CI/) for a brief explanation
+`se` is for displaying confidence intervals (95% by default). The interpretation of confidence intervals it *not* a probability of being right. Check [this animation](http://rpsychologist.com/d3/CI/) for a brief explanation. It is a range of plausible values for the population paremeter being estimated along with the estimation procedure.
 
 
 ```{r fitting a lm}
