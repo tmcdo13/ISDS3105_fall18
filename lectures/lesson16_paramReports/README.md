@@ -111,7 +111,7 @@ map(.x = pull(regions),
 
 ## Exercise
 
-We worked on a map of alcohol consumption for beer, spirits, and wine.
+Remember the map of alcohol consumption for beer, spirits, and wine?
 Create a parametrized report for each type of serving using parameters
 to render dynamically:
 
