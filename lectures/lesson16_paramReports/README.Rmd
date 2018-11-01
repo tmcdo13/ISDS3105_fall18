@@ -78,8 +78,9 @@ regions <- distinct(steak_survey, region) %>% drop_na()
 map(.x = pull(regions), 
      ~ rmarkdown::render(here::here('lectures', 'lesson16_paramReports', 'template.Rmd'),
                                   params = list(steak = T, region = .x), 
+                                  output_format = "html_document",
                                   output_dir = here::here('lectures', 'lesson16_paramReports', 'report'),
-                                  output_file = paste0(.x,'.pdf')))
+                                  output_file = paste0(.x,'.html')))
 ```
 
 ## Exercise
