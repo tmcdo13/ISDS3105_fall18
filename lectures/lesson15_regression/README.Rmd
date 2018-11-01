@@ -140,6 +140,7 @@ fit2 <- glm(n ~ TempHigh + Precip, family = poisson(link = 'log'), data = dt_cri
  
 ```{r}
 toPredict <- data_frame(TempHigh = c(84,84), Precip = c(0,2))
+pi <- predict(fit2, type = 'response', newdata = toPredict, se.fit = T)[1:2]
 data_frame(fitted = pi$fit, lower = (pi$fit - 1.96*pi$se.fit), upper = (pi$fit + 1.96*pi$se.fit))
 ```
  
