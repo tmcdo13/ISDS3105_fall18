@@ -15,11 +15,10 @@ library(flexdashboard)
 
 ```{r}
 dt <- read_csv(file = 'https://raw.githubusercontent.com/fivethirtyeight/data/master/terrorism/eu_terrorism_fatalities_by_country.csv')
+dtYear <- tidyr::gather(dt, 'state', 'casualties', - iyear)
 
-#use  gather() to transform `dt` in a longitudinal dataset and save it to dtYear 
-dtYear <- dt %>% gather(key = 'country', value = 'casualties', -iyear)
-#use dtYear to create a dataset total casualties by state and save it to dt
-dt <- dtYear %>% group_by(country) %>% summarise(total = sum(casualties))
+dt <- dtYear %>% 
+  group_by(state) %>% summarise(total = sum(casualties))
 ```
 
 
@@ -29,8 +28,10 @@ Column {data-width=650}
 ### Europe
 
 ```{r}
-ggplot(data = dt) +
-  geom_col(aes(x = country, total))
+dt %>% 
+  ggplot(aes(x = state, y = total)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  geom_col()
 ```
 
 Column {data-width=350}
@@ -39,11 +40,9 @@ Column {data-width=350}
 ### State 1
 
 ```{r}
-
-#plot a linechart of the yearly casualties for 1 country (using dtYear)
 function.plot <- function(dt,myCountry){
 
-dt <- dt %>% filter(country == myCountry)
+dt <- dt %>% filter(state == myCountry)
  ggplot( data = dt,aes(iyear, casualties ))+
    scale_x_continuous("Year")+
    geom_line()
@@ -54,8 +53,6 @@ function.plot(dtYear,"United Kingdom")
 ### State 2
 
 ```{r}
-
-#plot a linechart of the yearly casualties for 1 country (using dtYear)
 function.plot(dtYear,"Belgium")
 ```
 
