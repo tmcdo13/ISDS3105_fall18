@@ -1,4 +1,4 @@
-## Assignment 7
+## Assignment 6
 
 Start from the chart we created in `lectures\lesson18_interactiveggplot` then add:
 
