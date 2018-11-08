@@ -40,6 +40,7 @@ Column {data-width=350}
 ### State 1
 
 ```{r}
+<<<<<<< HEAD
 function.plot <- function(dt,myCountry){
 
 dt <- dt %>% filter(state == myCountry)
@@ -48,11 +49,24 @@ dt <- dt %>% filter(state == myCountry)
    geom_line()
 }
 function.plot(dtYear,"United Kingdom")
+=======
+filter(dtYear, state == 'United Kingdom') %>% 
+ggplot(aes(x = iyear, y = casualties)) +
+  scale_x_continuous(name = 'year') + 
+  geom_line()
+>>>>>>> d25149dae5283c1c2dc30c804a64fd8cb0b93c8d
 ```
 
 ### State 2
 
 ```{r}
+<<<<<<< HEAD
 function.plot(dtYear,"Belgium")
+=======
+filter(dtYear, state == 'Belgium') %>% 
+ggplot(aes(x = iyear, y = casualties)) +
+  scale_x_continuous(name = 'year') +
+  geom_line()
+>>>>>>> d25149dae5283c1c2dc30c804a64fd8cb0b93c8d
 ```
 

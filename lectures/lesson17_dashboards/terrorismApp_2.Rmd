@@ -67,21 +67,26 @@ Column {data-width=350}
 ```{r}
 #create a function to plot a linechart given a dataset `df` and a country name `country`
 function.statePlot <- function(dt,myCountry){
-
 dt <- dt %>% filter(state == myCountry)
  ggplot( data = dt,aes(iyear, casualties ))+
    scale_x_continuous("Year")+
    geom_line()
 }
 function.statePlot(dtYear,input$state1)
+
+renderPlot({
+ dtYear %>% mutate(selected = input$state1 %in% statesNames) %>%
+   ggplot(aes(x = iyear, y = casualties)) + geom_line()
+})
 ```
 
 ### Make this reactive using reactive({})
 
 ```{r}
 
-renderPlot({ 
-  statePlot(dtYear, input$state2) 
-  })
+renderPlot({
+ dtYear %>% mutate(selected = input$state2 %in% statesNames) %>%
+   ggplot(aes(x = iyear, y = casualties)) + geom_line()
+})
 ```
 
