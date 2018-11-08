@@ -34,9 +34,9 @@ statesNames <- setNames(unique(dt$state), unique(dt$state)) %>% as.list()
     selected = 'Belgium')
 
 #dropdown menu for the second (uncomment and fill the ...)
- selectInput(id = ..., label = ..., 
-    choices = ..., 
-    selected = ...)
+selectInput("state2", label = h4("State 2"),
+   choices = statesNames,
+   selected = 'France')
 ```
  
 
