@@ -1,0 +1,33 @@
+---
+title: "Assignment 6"
+author: "Tyler McDonald"
+date: "November 19, 2018"
+output: html_document
+runtime: shiny
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+library(shiny)
+library(fivethirtyeight)
+library(tidyverse)
+knitr::opts_chunk$set(echo = F)
+```
+
+```{r}
+div(style="display:inline-block", selectInput( inputId = "xaxis", "X-axis:", names(bad_drivers), selected = 'perc_speeding'))
+div(style="display:inline-block", selectInput( inputId = "yaxis", "Y-axis:", names(bad_drivers), selected = 'perc_alcohol'))
+div(style="display:inline-block", selectInput( inputId = "size", "Size:", names(bad_drivers), selected = 'perc_alcohol'))
+div(style="display:inline-block", textInput( inputId = "state", "State:", value = 'Louisiana'))
+```
+
+```{r}
+renderPlot({
+bad_drivers %>% mutate(state = input$state)
+ggplot(data = bad_drivers, aes_string(x = input$xaxis, y = input$yaxis, size = input$size))  +
+    geom_point() +
+  ggtitle('Insurance premiums data')
+})
+```
+

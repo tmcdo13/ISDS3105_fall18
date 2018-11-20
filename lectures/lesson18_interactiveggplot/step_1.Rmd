@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = F)
 
 ```{r}
 #use selectInput() to create a dropdown menu
+selectInput()
 #you can use html code to position the input widget ----  e.g. div(style="display:inline-block", .... )
 ```
 

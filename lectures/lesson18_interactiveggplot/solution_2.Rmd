@@ -1,4 +1,8 @@
 ---
+output: html_document
+runtime: shiny
+---
+inst---
 title: "Lesson 18"
 output: html_document
 runtime: shiny
