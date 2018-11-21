@@ -24,9 +24,10 @@ div(style="display:inline-block", textInput( inputId = "state", "State:", value 
 
 ```{r}
 renderPlot({
-bad_drivers %>% mutate(state = input$state)
-ggplot(data = bad_drivers, aes_string(x = input$xaxis, y = input$yaxis, size = input$size))  +
+choose_state <- ifelse(bad_drivers$state %in% input$state, 'selected', 'NA')
+ggplot(data = bad_drivers, aes_string(x = input$xaxis, y = input$yaxis, size = input$size, tooltip = 'state'))  +
     geom_point() +
+    geom_point(aes(color = choose_state)) +
   ggtitle('Insurance premiums data')
 })
 ```
