@@ -85,7 +85,7 @@ college_recent_grads %>%
 ```{r, error=TRUE}
 college_recent_grads %>% 
   group_by(major_category) %>% 
-  summarise(percent = women/total) %>% 
+  summarise(percent = sum(women)/sum(total)) %>% 
   slice(1:5)
 ```
 
@@ -111,7 +111,7 @@ college_recent_grads %>%
 \vspace{30pt}
 ```{r, error=TRUE}
 college_recent_grads %>% 
-  filter(major_category == 'Engineering', major_category == 'Business') %>% 
+  filter(major_category == 'Engineering' | major_category == 'Business') %>% 
   count(major_category)
 ```
 
@@ -128,7 +128,7 @@ college_recent_grads %>%
 college_recent_grads %>% 
   slice(1) %>% 
   select(sharewomen) %>% 
-  filter(sharewomen == scales::percent(sharewomen))
+  summarise(sharewomen = scales::percent(sharewomen))
 ```
 
 \vspace{30pt}
@@ -149,7 +149,7 @@ map_dbl(mtcars,mean)
 
 ```{r, error=TRUE}
 columnwiseMean <- function(df) {
-  if (is.data.frame(df)) stop('`df` is not a dataframe')
+  if (!is.data.frame(df)) stop('`df` is not a dataframe')
   map(df, mean)
 } 
 columnwiseMean(cars)
@@ -232,8 +232,8 @@ steak_survey %>% group_by(lottery_a, smoke) %>%   # 2.
   - datasets being plotted in `ggplot()` should be "tidy" (or in longitudinal form): TRUE
   
   
-  - in ggplot, we can map multiple variables to the same aesthetic: TRUE
+  - in ggplot, we can map multiple variables to the same aesthetic: TRUE - FALSE
   
   
-  - every time we query a database using `dplyr` the output is automatically collected locally on our machine: 
+  - every time we query a database using `dplyr` the output is automatically collected locally on our machine: TRUE - FALSE
 
