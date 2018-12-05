@@ -34,7 +34,7 @@ library(fivethirtyeight)
 
 ```{r, error=TRUE}
 ggplot(data = steak_survey) +
-  geom_col(aes(x = region)) +
+  geom_bar(aes(x = region)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
@@ -47,7 +47,7 @@ ggplot(data = steak_survey) +
 
 ```{r}
 ggplot(data = steak_survey) +
-  geom_bar(aes(x = steak_prep, fill = 'darkblue')) +
+  geom_bar(aes(x = steak_prep), fill = 'darkblue') +
   facet_wrap(~ lottery_a) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
@@ -61,7 +61,7 @@ ggplot(data = steak_survey) +
 ```{r, error=TRUE}
 ggplot(bad_drivers) +
   geom_smooth(aes(insurance_premiums, losses), method = 'lm') +
-  geom_point()
+  geom_point(aes(x = insurance_premiums, y = losses))
 ```
 
 
@@ -74,7 +74,7 @@ ggplot(bad_drivers) +
 ```{r, }
 college_recent_grads %>% 
   group_by(major_category) %>% 
-  summarise(Total = sum(total)) %>% 
+  summarise(Total = sum(total,na.rm = TRUE)) %>% 
   slice(1:5)
 ```
 
@@ -85,7 +85,7 @@ college_recent_grads %>%
 ```{r, error=TRUE}
 college_recent_grads %>% 
   group_by(major_category) %>% 
-  summarise(percent = n(women)/n(total)) %>% 
+  summarise(percent = women/total) %>% 
   slice(1:5)
 ```
 
@@ -99,7 +99,7 @@ college_recent_grads %>%
 
 ```{r, error=TRUE}
 college_recent_grads %>% 
-  filter(max(sharewomen, na.rm = T)) %>% 
+  filter(sharewomen == max(sharewomen, na.rm = T)) %>% 
   select(major_category:sharewomen)
 ```
 
@@ -112,7 +112,7 @@ college_recent_grads %>%
 ```{r, error=TRUE}
 college_recent_grads %>% 
   filter(major_category == 'Engineering', major_category == 'Business') %>% 
-  count(major_category) 
+  count(major_category)
 ```
 
 \vspace{30pt}
@@ -128,7 +128,7 @@ college_recent_grads %>%
 college_recent_grads %>% 
   slice(1) %>% 
   select(sharewomen) %>% 
-  filter(sharewomen = scales::percent(sharewomen))
+  filter(sharewomen == scales::percent(sharewomen))
 ```
 
 \vspace{30pt}
@@ -137,7 +137,7 @@ college_recent_grads %>%
 9. Output a vector of means
 
 ```{r, error=TRUE}
-map_dbl(mean, mtcars)
+map_dbl(mtcars,mean)
 ```
 
 
@@ -166,7 +166,7 @@ prc <- function(total, obs, call. = FALSE) {
           if (!is.double(total) | !is.double(obs)) {
             stop('`total` and `obs` must be of type numeric')  
             }
-         (obs / total) * 100
+         x <- (obs / total) * 100
          x <- paste0(x, '%')
          x
 }
@@ -181,13 +181,13 @@ prc(400, 20)
 #General R knowledge (TRUE/FALSE)
 
 
-  - `==` performs an assignment operation : 
+  - `==` performs an assignment operation : FALSE
  
-  - a `NA` is equivalent to `0` : 
+  - a `NA` is equivalent to `0` : FALSE
  
-  - In dataframes, each column must have the same number of rows/cells: 
+  - In dataframes, each column must have the same number of rows/cells: TRUE
  
-  - The code snippets below retrieve the same output:
+  - The code snippets below retrieve the same output: TRUE
  
 ```{r, eval=FALSE}
 c(1, 4, 3) + 1           # 1.
@@ -196,7 +196,7 @@ c(1, 4, 3) + c(1, 1, 1)  # 2.
 ```
  
 
-  - The code snippets below retrieve the same output when `x` is the same: 
+  - The code snippets below retrieve the same output when `x` is the same: FALSE
  
 ```{r, eval=FALSE}
 mean(is.na(x))             # 1. 
@@ -205,7 +205,7 @@ x %>% mean() %>% is.na(x)  # 2.
 ```
  
 
-  - The code snippets below retrieve the same output when `x` is the same: 
+  - The code snippets below retrieve the same output when `x` is the same: TRUE
  
 ```{r, eval=FALSE}
 bad_drivers %>% filter(num_drivers > x)    # 1. 
@@ -214,7 +214,7 @@ bad_drivers %>% filter(!(num_drivers <= x))  # 2.
 ```
 
 
-  - The code snippets below retrieve the same output: 
+  - The code snippets below retrieve the same output: FALSE
  
 ```{r, eval=FALSE}
 steak_survey %>% count(lottery_a, smoke)          # 1. 
@@ -223,16 +223,16 @@ steak_survey %>% group_by(lottery_a, smoke) %>%   # 2.
   summarise(sum())
 ```
 
-  - `filter` is for manipulating rows, while `slice` is for manipulating variables: 
+  - `filter` is for manipulating rows, while `slice` is for manipulating variables: FALSE
   
 
-  - the output from `summarise()` has as many rows as the grouping levels: 
+  - the output from `summarise()` has as many rows as the grouping levels: TRUE
 
   
-  - datasets being plotted in `ggplot()` should be "tidy" (or in longitudinal form): 
+  - datasets being plotted in `ggplot()` should be "tidy" (or in longitudinal form): TRUE
   
   
-  - in ggplot, we can map multiple variables to the same aesthetic: 
+  - in ggplot, we can map multiple variables to the same aesthetic: TRUE
   
   
   - every time we query a database using `dplyr` the output is automatically collected locally on our machine: 
